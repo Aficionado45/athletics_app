@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "885327861735",
+    "project_id": "athletics-app-fd3f7",
+    "storage_bucket": "athletics-app-fd3f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885327861735:android:433447f649ad07165e8f42",
+        "android_client_info": {
+          "package_name": "com.example.athletics_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885327861735-tjqo52fsndp8ltkoff9mffslomjdh56m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWdX54M3848S8gpwfe7YcV3QMcoB_3wVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885327861735-tjqo52fsndp8ltkoff9mffslomjdh56m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
