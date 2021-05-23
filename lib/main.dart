@@ -3,6 +3,9 @@ import 'screens/welcome.dart';
 import 'screens/loginscreeen.dart';
 import 'screens/photogallery.dart';
 import 'screens/userinfo.dart';
+import 'screens/records.dart';
+import 'screens/leaderboard.dart';
+import 'screens/achievements.dart';
 void main() {
   runApp(MyApp());
 }
@@ -19,10 +22,13 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'welcome',
       routes: {
         //Add all the page navigation references here to navigate across screens.
-         'welcome':(context) => Welcome(),
         'user':(context) => MemberInfo(),
         'gallery':(context) => gallery(),
         'login':(context) => login(),
+        'welcome':(context) => WelcomeScreen(),
+        'record':(context) => Records(),
+        'leaderboard':(context) => Leaderboard(),
+        'achievement':(context) => Achievement(),
 
       },
     );
