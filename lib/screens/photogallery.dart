@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home:gallery(),
-  ));
-}
 
 class gallery extends StatefulWidget {
   @override
