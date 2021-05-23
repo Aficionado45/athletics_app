@@ -18,29 +18,34 @@ class _RecordsState extends State<Records> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
-          title: Text("Records",
+          title: Text(
+            'Records',
             style: TextStyle(
-              color:Colors.white,
+              fontSize: 30,
+              color: Colors.white,
             ),
           ),
           centerTitle: true,
-          // ignore: deprecated_member_use
           leading: FlatButton(
-            onPressed: () { /* Write listener code here */ },
+            onPressed: () {
+              Navigator.pushNamed(context, 'homescreen');
+            },
             child: Icon(
-              Icons.arrow_back_ios_rounded,
-              size: 36,
-              color: Colors.white,// add custom icons also
+              Icons.arrow_back_sharp,
+              size: 30,
+              color: Colors.white,
             ),
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: (){
+                Navigator.pushNamed(context, 'user');
+              },
               icon: Icon(
-                Icons.account_circle_rounded,
-                size: 36,
-                color: Colors.white,
 
+                Icons.account_circle,
+                color: Colors.white,
+                size: 30,
               ),
             ),
           ],
