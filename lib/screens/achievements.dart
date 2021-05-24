@@ -94,6 +94,7 @@ class _AchievementState extends State<Achievement> {
 
               ),
 
+
               // ignore: deprecated_member_use
               title: Text(''),
             ),
@@ -106,6 +107,13 @@ class _AchievementState extends State<Achievement> {
                 color: Colors.white,
                 iconSize: 30,
 
+
+          ),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background.jpeg"),
+                fit: BoxFit.cover,
               ),
               // ignore: deprecated_member_use
               title: Text(''),

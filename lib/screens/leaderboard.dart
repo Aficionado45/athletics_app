@@ -96,6 +96,7 @@ class _LeaderboardState extends State<Leaderboard> {
                 iconSize: 30,
               ),
 
+
               // ignore: deprecated_member_use
               title: Text(''),
             ),
@@ -107,6 +108,14 @@ class _LeaderboardState extends State<Leaderboard> {
                 icon: Icon(Icons.group_rounded),
                 color: Colors.white,
                 iconSize: 30,
+
+          ),
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background.jpeg"),
+                fit: BoxFit.cover,
+
               ),
               // ignore: deprecated_member_use
               title: Text(''),
