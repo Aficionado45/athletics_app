@@ -45,40 +45,67 @@ class _RecordsState extends State<Records> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: _currentindex,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              backgroundColor: Color(0xFF143B40),
-              // ignore: deprecated_member_use
-              title:Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.leaderboard),
-              // ignore: deprecated_member_use
-              title:Text('home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.emoji_events_rounded),
+        bottomNavigationBar:
+        Theme(
+          data: Theme.of(context).copyWith(
+              canvasColor: Color.fromRGBO(255, 255, 255, 255),
+              primaryColor: Colors.red,
+              textTheme: Theme.of(context).textTheme.copyWith(
+                  caption: TextStyle(
+                      color: Colors
+                          .black))),
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,0,0),
+              child: BottomNavigationBar(
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                currentIndex: 0,
+                items: [
+                  BottomNavigationBarItem(
 
-              // ignore: deprecated_member_use
-              title:Text('home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              // ignore: deprecated_member_use
-              title:Text(''),
-            ),
-          ],
+                    icon:
+                    Icon(Icons.home_rounded,
+                      size: 30,
+                    ),
 
+                    backgroundColor: Color(0xFF143B40),
+                    // ignore: deprecated_member_use
+                    title:Text(''),
+
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.leaderboard,
+                      size: 30,
+                    ),
+                    // ignore: deprecated_member_use
+                    title:Text(''),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.emoji_events_rounded,
+                      size: 30,
+                    ),
+
+                    // ignore: deprecated_member_use
+                    title:Text(''),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.people,
+                      size: 30,
+                    ),
+                    // ignore: deprecated_member_use
+                    title:Text(''),
+                  ),
+                ],
+              ),
+
+            ),
+          ),
         ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("asset/background.jpeg"),
+              image: AssetImage("assets/background.jpeg"),
               fit: BoxFit.cover,
             ),
           ),

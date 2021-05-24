@@ -77,7 +77,7 @@ class _LeaderboardState extends State<Leaderboard> {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("asset/background.jpeg"),
+                image: AssetImage("assets/background.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),

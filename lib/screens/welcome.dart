@@ -17,7 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("asset/background.jpeg"),
+              image: AssetImage("assets/background.jpeg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 margin: EdgeInsets.fromLTRB(100, 100, 100, 20),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.asset('asset/logo.jpeg'),
+                  child: Image.asset('assets/logo.jpeg'),
                 ),
               ),
 

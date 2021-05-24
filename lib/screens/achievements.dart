@@ -78,7 +78,7 @@ class _AchievementState extends State<Achievement> {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("asset/background.jpeg"),
+                image: AssetImage("assets/background.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),

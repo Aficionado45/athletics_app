@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'screens/records.dart';
 import 'screens/welcome.dart';
 import 'screens/loginscreeen.dart';
 import 'screens/photogallery.dart';
 import 'screens/userinfo.dart';
-import 'screens/records.dart';
 import 'screens/leaderboard.dart';
 import 'screens/achievements.dart';
 void main() {
