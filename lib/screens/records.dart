@@ -19,7 +19,7 @@ class _RecordsState extends State<Records> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Records',
+            'Athletics App',
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,

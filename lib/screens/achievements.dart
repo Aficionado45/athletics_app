@@ -16,35 +16,40 @@ class _AchievementState extends State<Achievement> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xFF143B40),
-            title: Text("Achievements",
-              style: TextStyle(
-                color:Colors.white,
-              ),
+        appBar: AppBar(
+          backgroundColor: Color(0xFF143B40),
+          title: Text(
+            'Athletics App',
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.white,
             ),
-            centerTitle: true,
-            // ignore: deprecated_member_use
-            leading: FlatButton(
-              onPressed: () { /* Write listener code here */ },
-              child: Icon(
-                Icons.arrow_back_ios_rounded,
-                size: 36,
-                color: Colors.white,// add custom icons also
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.account_circle_rounded,
-                  size: 36,
-                  color: Colors.white,
-
-                ),
-              ),
-            ],
           ),
+          centerTitle: true,
+          leading: FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, 'homescreen');
+            },
+            child: Icon(
+              Icons.arrow_back_sharp,
+              size: 30,
+              color: Colors.white,
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: (){
+                Navigator.pushNamed(context, 'user');
+              },
+              icon: Icon(
+
+                Icons.account_circle,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
