@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
 
 
 
@@ -121,7 +121,9 @@ class _LeaderboardState extends State<Leaderboard> {
                 fit: BoxFit.cover,
               ),
             ),
+              child: Container(
 
+          ),
           )
 
       ) ,
