@@ -18,7 +18,7 @@ class _LeaderboardState extends State<Leaderboard> {
           appBar: AppBar(
             backgroundColor: Color(0xFF143B40),
             title: Text(
-              'Athletics App',
+              'Leaderboard',
               style: TextStyle(
                 fontSize: 30,
                 color: Colors.white,
