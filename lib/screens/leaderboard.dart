@@ -126,7 +126,7 @@ class _LeaderboardState extends State<Leaderboard> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/calender.jpg',
+                      'assets/athlete.jpeg',
                       height: 250,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -144,7 +144,7 @@ class _LeaderboardState extends State<Leaderboard> {
           ),
           )
 
-     
+
     );
   }
 }
