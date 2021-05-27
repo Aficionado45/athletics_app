@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 
@@ -9,6 +11,25 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+
+  String _email, _password;
+
+  checkAuthentication() async{
+    _auth.onAuthStateChanged.listen((user) {
+      if(user!=null){
+        Navigator.pushNamed(context, 'homescreen');
+      }
+    });
+  }
+  @override
+  void initState()
+  {
+    super.initState();
+    this.checkAuthentication();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,16 +92,22 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:Text('E-mail ID',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  validator: (value){
+                    if(value.isEmpty)
+                      {return 'Enter Email';}
+                    return null;
+                    },
+                decoration: InputDecoration(
+                  labelText: 'Email-ID',
+                  prefixIcon: Icon(Icons.email),
+                ),
+                  onSaved: (value) => _email = value
 
                 ),
-
               ),
-
             ),
             SizedBox(
               height: 20,
@@ -95,14 +122,23 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:Text('Password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                    validator: (value){
+                      if(value.isEmpty)
+                      {return 'Enter Email';}
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      prefixIcon: Icon(Icons.lock),
+
+                    ),
+                    obscureText: true,
+                    onSaved: (value) => _password = value
 
                 ),
-
               ),
 
             ),
