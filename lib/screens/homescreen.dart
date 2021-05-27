@@ -34,11 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.pushNamed(context, 'user');
             },
             icon: Icon(
-
               Icons.account_circle,
               color: Colors.white,
               size: 30,
@@ -71,24 +70,29 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.image,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Gallery',
-                    style: TextStyle(
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'gallery');
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.image,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Gallery',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 15),
@@ -101,6 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child:FlatButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, 'alumni');
+                },
               child: Row(
                 children: [
                   Icon(
@@ -120,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            ),
+            ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -131,8 +139,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Row(
-                children: [
+              child:FlatButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, 'record');
+                },
+                child: Row(
+                  children: [
                   Icon(
                     Icons.article_sharp,
                     color: Colors.white,
@@ -150,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            ),
+            ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -161,8 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Row(
-                children: [
+              child:FlatButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, 'memberlist');
+                },
+                child: Row(
+                  children: [
                   Icon(
                     Icons.group_rounded,
                     color: Colors.white,
@@ -180,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            ),
+            ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -191,8 +207,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Row(
-                children: [
+              child:FlatButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, 'achievement');
+                },
+                child: Row(
+                  children: [
                   Icon(
                     Icons.emoji_events_rounded,
                     color: Colors.white,
@@ -210,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            ),
+            ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -221,8 +241,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 320,
               height: 60,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Row(
-                children: [
+              child:FlatButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, 'leaderboard');
+                },
+                child: Row(
+                  children: [
                   Icon(
                     Icons.leaderboard,
                     color: Colors.white,
@@ -240,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-            ),
+            ),),
           ],
         ),
       ),
@@ -259,7 +283,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.home),
                 color: Colors.white,
                 iconSize: 30,
-
               ),
             ),
 
@@ -270,12 +293,11 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () {
-              Navigator.pushNamed(context, 'leaderboard');
+                Navigator.pushNamed(context, 'leaderboard');
               },
               icon: Icon(Icons.leaderboard),
               color: Colors.white,
               iconSize: 30,
-
             ),
             // ignore: deprecated_member_use
             title: Text(''),
@@ -288,7 +310,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.emoji_events_rounded),
               color: Colors.white,
               iconSize: 30,
-
             ),
 
             // ignore: deprecated_member_use
@@ -302,7 +323,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.group_rounded),
               color: Colors.white,
               iconSize: 30,
-
             ),
             // ignore: deprecated_member_use
             title: Text(''),

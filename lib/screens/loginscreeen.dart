@@ -172,7 +172,7 @@ class _loginState extends State<login> {
               // ignore: deprecated_member_use
               child: FlatButton(
                 onPressed: (){
-                  // Navigator.pushNamed(context, 'homescreen');
+                   Navigator.pushNamed(context, 'homescreen');
                 },
                 child:Text(
                   'LOGIN',

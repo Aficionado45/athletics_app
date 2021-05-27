@@ -1,19 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+
+
 class Achievement extends StatefulWidget {
   @override
   _AchievementState createState() => _AchievementState();
 }
 
 class _AchievementState extends State<Achievement> {
-  int _currentindex = 0;
+  int _currentindex=0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar:AppBar(
+        appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
             'Achievements',
@@ -94,7 +97,6 @@ class _AchievementState extends State<Achievement> {
 
               ),
 
-
               // ignore: deprecated_member_use
               title: Text(''),
             ),
@@ -107,59 +109,22 @@ class _AchievementState extends State<Achievement> {
                 color: Colors.white,
                 iconSize: 30,
 
-
-          ),
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/background.jpeg"),
-                fit: BoxFit.cover,
               ),
               // ignore: deprecated_member_use
               title: Text(''),
             ),
           ],
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("asset/background.jpeg"),
-              fit: BoxFit.cover,
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background.jpeg"),
+                fit: BoxFit.cover,
+              ),
             ),
+
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(150, 80, 150, 55),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: Text('hello'),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(150, 80, 150, 55),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: Text('hello'),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(150, 80, 150, 55),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: Text('hello'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      ) ,
     );
   }
 }
