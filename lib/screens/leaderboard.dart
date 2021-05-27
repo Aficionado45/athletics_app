@@ -121,12 +121,30 @@ class _LeaderboardState extends State<Leaderboard> {
                 fit: BoxFit.cover,
               ),
             ),
-              child: Container(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/calender.jpg',
+                      height: 250,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Calender',
+                        style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 22.0),
+                      )),
+                ],
+              ),
 
           ),
           )
 
-      ) ,
+     
     );
   }
 }
