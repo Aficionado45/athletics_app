@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 
@@ -9,7 +10,24 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey= GlobalKey<FormState>();
+
+  String _email, _password;
+
+  checkAuthentication() async{
+    _auth.onAuthStateChanged.listen(user){
+      if(user!=null){
+        Navigator.pushNamed(context, 'homescreen');
+      }
+    }
+  }
   @override
+  void initState()
+  {
+    super.initState();
+    this.checkAuthentication();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
@@ -71,13 +89,22 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:Text('E-mail ID',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+              child:TextFormField(
+                validator: (input) {
+                  // ignore: missing_return
+                  if (input.isEmpty) {
+                    // ignore: missing_return
+                    return 'Enter Email';
+                  }
+                },
 
-                ),
+                decoration: InputDecoration(
+                labelText: "Email-ID",
+                prefixIcon: Icon(Icons.email),
+              ),
+                obscureText:true,
+                onSaved:(input) => _email = input;
+
 
               ),
 
@@ -95,13 +122,18 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:Text('Password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+              child:TextFormField(
+                  validator: (input) {
+                    if (input.length < 6)
+                      return 'Provide minimum 6 characters';
+                  },
+                  decoration: InputDecoration(
+                      labelText: "Password",
+                      prefixIcon: Icon(Icons.lock),
+                    ),
+                    obscureText:true,
+                    onSaved:(input) => _password = input;
 
-                ),
 
               ),
 

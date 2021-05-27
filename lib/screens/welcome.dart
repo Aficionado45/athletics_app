@@ -40,7 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
               Text('ATHLETICS CLUB',
                 style: TextStyle(
-                  fontSize: 34,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(
