@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,11 +17,11 @@ class _loginState extends State<login> {
   String _email, _password;
 
   checkAuthentication() async{
-    _auth.onAuthStateChanged.listen(user){
+    _auth.onAuthStateChanged.listen((user) {
       if(user!=null){
         Navigator.pushNamed(context, 'homescreen');
       }
-    }
+    });
   }
   @override
   void initState()
@@ -28,6 +29,8 @@ class _loginState extends State<login> {
     super.initState();
     this.checkAuthentication();
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
@@ -89,25 +92,22 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:TextFormField(
-                validator: (input) {
-                  // ignore: missing_return
-                  if (input.isEmpty) {
-                    // ignore: missing_return
-                    return 'Enter Email';
-                  }
-                },
-
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  validator: (value){
+                    if(value.isEmpty)
+                      {return 'Enter Email';}
+                    return null;
+                    },
                 decoration: InputDecoration(
-                labelText: "Email-ID",
-                prefixIcon: Icon(Icons.email),
+                  labelText: 'Email-ID',
+                  prefixIcon: Icon(Icons.email),
+                ),
+                  onSaved: (value) => _email = value
+
+                ),
               ),
-                obscureText:true,
-                onSaved:(input) => _email = input;
-
-
-              ),
-
             ),
             SizedBox(
               height: 20,
@@ -122,19 +122,23 @@ class _loginState extends State<login> {
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child:TextFormField(
-                  validator: (input) {
-                    if (input.length < 6)
-                      return 'Provide minimum 6 characters';
-                  },
-                  decoration: InputDecoration(
-                      labelText: "Password",
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                    validator: (value){
+                      if(value.isEmpty)
+                      {return 'Enter Email';}
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Password',
                       prefixIcon: Icon(Icons.lock),
+
                     ),
-                    obscureText:true,
-                    onSaved:(input) => _password = input;
+                    obscureText: true,
+                    onSaved: (value) => _password = value
 
-
+                ),
               ),
 
             ),
