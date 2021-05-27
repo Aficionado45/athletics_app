@@ -10,11 +10,13 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
-    super.initState();
-    new Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushNamed(context, 'login');
-    });
+  super.initState();
+  new Future.delayed(const Duration(seconds: 3), () {
+  Navigator.pushNamed(context, 'login');
+  });
   }
+
+  @override
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
