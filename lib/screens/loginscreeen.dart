@@ -1,11 +1,7 @@
 import 'dart:async';
-import 'package:athletics_app/authentication_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
-
-
 
 class login extends StatefulWidget {
   @override
@@ -13,9 +9,14 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
-  final TextEditingController emailcontroller= TextEditingController();
-  final TextEditingController passwordcontroller= TextEditingController();
   @override
+  final _auth = FirebaseAuth.instance;
+  String email,password;
+
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
@@ -30,10 +31,6 @@ class _loginState extends State<login> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-
-
-
-
                 SizedBox(
                   height: 120,
                 ),
@@ -81,12 +78,19 @@ class _loginState extends State<login> {
                   height: 59,
                   padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
                   child:TextField(
-                    controller: emailcontroller,
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Colors.white,
                     ),
+                    onChanged: (value){
+                      if(value.isEmpty)
+                        return null;
+                      else{
+                        email=value;
+                      }
+                  },
                     decoration: InputDecoration(
-
                       labelStyle: TextStyle(
                         color: Colors.white,
                         fontSize: 20
@@ -113,7 +117,15 @@ class _loginState extends State<login> {
                    style: TextStyle(
                      color: Colors.white,
                    ),
-                   controller: passwordcontroller,
+                   keyboardType: TextInputType.emailAddress,
+                   textAlign: TextAlign.start,
+                   onChanged: (value){
+                     if(value.isEmpty)
+                       return null;
+                     else{
+                       password=value;
+                     }
+                   },
                    decoration: InputDecoration(
                      fillColor: Colors.white,
                      labelStyle: TextStyle(
@@ -156,11 +168,16 @@ class _loginState extends State<login> {
                   width: 110,
                   height: 40,
                   child: FlatButton(
-                    onPressed: (){
-                      context.read<AuthenticationService>().signIn(
-                        email: emailcontroller.text.trim(),
-                        password: passwordcontroller.text.trim(),
-                      );
+                    onPressed: () async{
+                      try{
+                        final user= await _auth.signInWithEmailAndPassword(email: email, password: password);
+                        if(user!=null){
+                          Navigator.pushNamed(context,'homescreen');
+                        }
+                      }      catch(e){
+                        print(e);
+                      }
+
                     },
                     child: Text("Login",
                       style: TextStyle(
