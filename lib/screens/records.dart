@@ -2,8 +2,53 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
+/*_launchURL1() async {
+  const url = 'https://drive.google.com/file/d/1dvXVqvacClrRwEJQuX9XbIM7Syk_qdhc/view?usp=sharing';
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: true, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL2() async {
+  const url = '';
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: true, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL3() async {
+  const url = '';
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: true, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL4() async {
+  const url = '';
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: true, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchURL5() async {
+  const url = '';
+  if (await canLaunch(url)) {
+    await launch(url, forceSafariVC: true, forceWebView: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 
+ */
 class Records extends StatefulWidget {
   @override
   _RecordsState createState() => _RecordsState();
@@ -129,71 +174,91 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 158, 12),
+                  padding: EdgeInsets.fromLTRB(62, 13, 128, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
-                  child: Text('Inter IIT',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white)
+                  child: FlatButton(
+                    onPressed: _launchURL1,
+                    child: Text('Inter IIT',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white)
+                    ),
                   ),
                 ),
+
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 188, 12),
+                  padding: EdgeInsets.fromLTRB(62, 13, 155, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
-                  child: Text('Spirit',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white)
+                  child: FlatButton(
+                    onPressed: _launchURL2,
+                    child: Text('Spirit',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white)
+                    ),
                   ),
                 ),
+
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 143, 13),
+                  padding: EdgeInsets.fromLTRB(62, 13, 122, 13),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
-                  child: Text('Spardha',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white)
+                  child: FlatButton(
+                    onPressed: _launchURL3,
+                    child: Text('Spardha',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white)
+                    ),
                   ),
                 ),
+
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 12, 92, 12),
+                  padding: EdgeInsets.fromLTRB(62, 12, 59, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
-                  child: Text('Cross Country',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white)
+                  child: FlatButton(
+                    onPressed: _launchURL4,
+                    child: Text('Cross Country',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white)
+                    ),
                   ),
                 ),
+
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 139, 12),
+                  padding: EdgeInsets.fromLTRB(62, 13, 106, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
-                  child: Text('All Others',
-                      style: TextStyle(
-                          fontSize: 24,
-                        color: Colors.white)
+
+                  child: FlatButton(
+                    onPressed: _launchURL5,
+                    child: Text('All Others',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white)
+                    ),
                   ),
                 ),
               ],
