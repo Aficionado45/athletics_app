@@ -2,7 +2,6 @@ import 'package:athletics_app/screens/Alumni.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-=======
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
@@ -32,24 +31,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: 'welcome',
-      routes: {
-        //Add all the page navigation references here to navigate across screens.
-        'user':(context) => MemberInfo(),
-        'gallery':(context) => gallery(),
-        'login':(context) => login(),
-        'welcome':(context) => WelcomeScreen(),
-        'record':(context) => Records(),
-        'leaderboard':(context) => Leaderboard(),
-        'achievement':(context) => Achievement(),
-        'homescreen': (context) => HomeScreen(),
-        'memberlist' : (context)=> Members(),
-        'alumni':(context)=> Alumni(),
 
-
-      },
-=======
     return MultiProvider(providers: [
       Provider<AuthenticationService>(
         create: (_) => AuthenticationService(FirebaseAuth.instance),
