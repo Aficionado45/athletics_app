@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
     ],
     child:MaterialApp(
       home: AuthenticationWrapper(),
-      initialRoute: 'record',
+      initialRoute: 'welcome',
       routes:{
     'user':(context) => MemberInfo(),
     'gallery':(context) => gallery(),
