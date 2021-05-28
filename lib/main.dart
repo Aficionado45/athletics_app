@@ -32,29 +32,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
-    return MultiProvider(providers: [
-      Provider<AuthenticationService>(
-        create: (_) => AuthenticationService(FirebaseAuth.instance),
-      ),
-      StreamProvider(
-        create: (context) =>context.read<AuthenticationService>().authStateChanges,
-      ),
-    ],
-    child:MaterialApp(
-      home: AuthenticationWrapper(),
+     return MaterialApp(
       initialRoute: 'welcome',
-      routes:{
-    'user':(context) => MemberInfo(),
-    'gallery':(context) => gallery(),
-    'login':(context) => login(),
-    'welcome':(context) => WelcomeScreen(),
-    'record':(context) => Records(),
-    'leaderboard':(context) => Leaderboard(),
-    'achievement':(context) => Achievement(),
-    'homescreen': (context) => HomeScreen(),
-    'memberlist' : (context)=> Members(),
-    'alumni':(context)=> Alumni(),
+      routes: {
+        //Add all the page navigation references here to navigate across screens.
+        'user':(context) => MemberInfo(),
+        'gallery':(context) => gallery(),
+        'login':(context) => login(),
+        'welcome':(context) => WelcomeScreen(),
+        'record':(context) => Records(),
+        'leaderboard':(context) => Leaderboard(),
+        'achievement':(context) => Achievement(),
+        'homescreen': (context) => HomeScreen(),
+        'memberlist' : (context)=> Members(),
+        'alumni':(context)=> Alumni(),
 
+
+  
 
     },
     ),
