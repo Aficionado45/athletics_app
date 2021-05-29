@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
      return MaterialApp(
-      initialRoute: 'welcome',
+      initialRoute: 'gallery',
       routes: {
         //Add all the page navigation references here to navigate across screens.
         'user':(context) => MemberInfo(),

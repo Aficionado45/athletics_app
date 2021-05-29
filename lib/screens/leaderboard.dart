@@ -118,7 +118,7 @@ class _LeaderboardState extends State<Leaderboard> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/background.jpeg"),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           child: Center(

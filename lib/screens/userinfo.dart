@@ -49,7 +49,7 @@ class _MemberInfoState extends State<MemberInfo> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.cover),
+              image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
         ),
         child: Column(
           children: [
@@ -227,10 +227,10 @@ class _MemberInfoState extends State<MemberInfo> {
                     onPressed: () {},
                     child: Container(
                         child: Image.asset(
-                      'assets/fb.jpg',
-                      height: 52,
-                      width: 52,
-                    )),
+                          'assets/fb.jpg',
+                          height: 52,
+                          width: 52,
+                        )),
                   ),
 
                   // ignore: deprecated_member_use
@@ -238,10 +238,10 @@ class _MemberInfoState extends State<MemberInfo> {
                     onPressed: () {},
                     child: Container(
                         child: Image.asset(
-                      'assets/insta.png',
-                      height: 40,
-                      width: 40,
-                    )),
+                          'assets/insta.png',
+                          height: 40,
+                          width: 40,
+                        )),
                   ),
                 ],
               ),

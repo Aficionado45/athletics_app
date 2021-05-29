@@ -94,7 +94,7 @@ class _MembersState extends State<Members> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
+
                             letterSpacing: 1.0,
                           ),
                         ),

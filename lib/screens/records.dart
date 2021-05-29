@@ -7,7 +7,7 @@ _launchURL1() async {
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
-   throw 'Could not launch $url';
+    throw 'Could not launch $url';
   }
 }
 
@@ -164,7 +164,7 @@ class _RecordsState extends State<Records> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/background.jpeg"),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           child: Center(
@@ -253,7 +253,7 @@ class _RecordsState extends State<Records> {
                   ),
 
                   child: FlatButton(
-                     onPressed: _launchURL5,
+                    onPressed: _launchURL5,
                     child: Text('All Others',
                         style: TextStyle(
                             fontSize: 24,

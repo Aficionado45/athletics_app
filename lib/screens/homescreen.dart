@@ -24,16 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         centerTitle: true,
-        leading: FlatButton(
-          onPressed: () {
-            Navigator.pushNamed(context, 'homescreen');
-          },
-          child: Icon(
-            Icons.arrow_back_sharp,
-            size: 30,
-            color: Colors.white,
-          ),
-        ),
+
         actions: [
           IconButton(
             onPressed: () {
@@ -89,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 28.0,
-                        fontWeight: FontWeight.bold,
+
                         letterSpacing: 1.0,
                       ),
                     )
@@ -111,26 +102,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: (){
                   Navigator.pushNamed(context, 'alumni');
                 },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.whatshot_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Alumni',
-                    style: TextStyle(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.whatshot_rounded,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
-              ),
-            ),),
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Alumni',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -147,24 +138,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Row(
                   children: [
-                  Icon(
-                    Icons.article_sharp,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Records',
-                    style: TextStyle(
+                    Icon(
+                      Icons.article_sharp,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
-              ),
-            ),),
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Records',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -181,24 +172,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Row(
                   children: [
-                  Icon(
-                    Icons.group_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Members',
-                    style: TextStyle(
+                    Icon(
+                      Icons.group_rounded,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
-              ),
-            ),),
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Members',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -215,24 +206,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Row(
                   children: [
-                  Icon(
-                    Icons.emoji_events_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Achievements',
-                    style: TextStyle(
+                    Icon(
+                      Icons.emoji_events_rounded,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
-              ),
-            ),),
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Achievements',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),),
             SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
@@ -249,24 +240,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Row(
                   children: [
-                  Icon(
-                    Icons.leaderboard,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  SizedBox(width: 40.0),
-                  Text(
-                    'Leaderboard',
-                    style: TextStyle(
+                    Icon(
+                      Icons.leaderboard,
                       color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      size: 30,
                     ),
-                  )
-                ],
-              ),
-            ),),
+                    SizedBox(width: 40.0),
+                    Text(
+                      'Leaderboard',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+
+                        letterSpacing: 1.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),),
           ],
         ),
       ),
