@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _launchURL1() async {
-  const url = 'https://drive.google.com/file/d/1dvXVqvacClrRwEJQuX9XbIM7Syk_qdhc/view?usp=sharing';
+  const url = 'https://drive.google.com/drive/folders/1wG0M66F_kbf9vsxh-SjREeAWC82afEjU?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
@@ -12,7 +12,7 @@ _launchURL1() async {
 }
 
 _launchURL2() async {
-  const url = '';
+  const url = 'https://drive.google.com/drive/folders/1CzxD1xFHyIhiwuEgvxo-fTs65U3wVHf_?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
@@ -21,7 +21,7 @@ _launchURL2() async {
 }
 
 _launchURL3() async {
-  const url = 'https://drive.google.com/file/d/1BsyKExhBcLdxOXHKJYc48zjsq9sgtGJQ/view?usp=sharing';
+  const url = 'https://drive.google.com/drive/folders/1D6KH7U4eJmZGFgriLNHJI46-mVPWToHH?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
@@ -30,7 +30,7 @@ _launchURL3() async {
 }
 
 _launchURL4() async {
-  const url = 'https://drive.google.com/file/d/1iaEHlofq5g8mNagImdAXuloWuQ3ymIEz/view?usp=sharing';
+  const url = 'https://drive.google.com/drive/folders/19kgHu051J_N0oJMSPKiJGk_Ax_cJmvlh?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
@@ -39,7 +39,7 @@ _launchURL4() async {
 }
 
 _launchURL5() async {
-  const url = '';
+  const url = 'https://drive.google.com/file/d/1kSnfujE6EyrkCPvmL-HhT6JifNfANP7M/view?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url, forceSafariVC: true, forceWebView: true);
   } else {
