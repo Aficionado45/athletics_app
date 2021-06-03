@@ -125,7 +125,7 @@ class _AchievementState extends State<Achievement> {
           ),
           child: StreamBuilder(
             stream: Firestore.instance.collection('achievements').snapshots(),
-            builder: (BuildContext conetxt, AsyncSnapshot<QuerySnapshot> snapshot){
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
               if(!snapshot.hasData)
                 return Center( child: CircularProgressIndicator(),
                 );
