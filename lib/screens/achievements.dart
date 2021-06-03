@@ -2,6 +2,7 @@ import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'memberScreen.dart';
@@ -22,7 +23,7 @@ class _AchievementState extends State<Achievement> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Achievements',
+            'Statistics',
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
@@ -161,7 +162,7 @@ class _AchievementState extends State<Achievement> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   alignment: FractionalOffset.centerLeft,
-                  width: 420,
+                  width: 400,
                   height: 10),
               SizedBox(height: 15),
               Container(
@@ -218,7 +219,7 @@ class _AchievementState extends State<Achievement> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   alignment: FractionalOffset.centerLeft,
-                  width: 350,
+                  width: 400,
                   height: 30),
               SizedBox(height: 15),
               Container(
