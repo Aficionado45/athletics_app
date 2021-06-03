@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -122,7 +123,212 @@ class _AchievementState extends State<Achievement> {
               fit: BoxFit.fill,
             ),
           ),
-
+          child: StreamBuilder(
+            stream: Firestore.instance.collection('achievements').snapshots(),
+            builder: (BuildContext conetxt, AsyncSnapshot<QuerySnapshot> snapshot){
+              if(!snapshot.hasData)
+                return Center( child: CircularProgressIndicator(),
+                );
+            return Center(
+              child: ListView(
+                //child: Column(
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 190,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                              color: Color(0xFF143B40),
+                              borderRadius: BorderRadius.circular(10)
+                                    ),
+                        child: Column(
+                          children: [
+                            Text(snapshot.data.documents[0]['TITLE'],
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(snapshot.data.documents[0]['DESCRIPTION'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Text(snapshot.data.documents[0]['RECORDS'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[0]['RECORDS 1'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                        ]
+                        ),
+                    ),
+                    Container(
+                      width: 350,
+                      height: 312,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          color: Color(0xFF143B40),
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Column(
+                          children: [
+                            Text(snapshot.data.documents[1]['TITLE'],
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(snapshot.data.documents[1]['DESCRIPTION'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Text(snapshot.data.documents[1]['RECORDS'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[1]['OUTPUT'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[1]['RECORDS 1'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[1]['OUTPUT 1'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white
+                              ),
+                            ),
+                          ]
+                      ),
+                    ),
+                    Container(
+                      width: 350,
+                      height: 240,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          color: Color(0xFF143B40),
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Column(
+                          children: [
+                            Text(snapshot.data.documents[2]['TITLE'],
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(snapshot.data.documents[2]['DESCRIPTION'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Text(snapshot.data.documents[2]['RECORDS'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[2]['RECORDS 1'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ]
+                      ),
+                    ),
+                    Container(
+                      width: 350,
+                      height: 210,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          color: Color(0xFF143B40),
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Column(
+                          children: [
+                            Text(snapshot.data.documents[3]['TITLE'],
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Text(snapshot.data.documents[3]['DESCRIPTION'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Text(snapshot.data.documents[3]['RECORDS'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(snapshot.data.documents[3]['RECORDS 1'],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ]
+                      ),
+                    ),
+                ],
+                // ),
+              ),
+            );
+            },
+          ),
         ),
       ) ,
     );
