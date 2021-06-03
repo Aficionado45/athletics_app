@@ -1,10 +1,17 @@
+import 'package:athletics_app/screens/Alumni.dart';
+import 'package:athletics_app/screens/photogallery.dart';
+import 'package:athletics_app/screens/records.dart';
+import 'package:athletics_app/screens/userinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'achievements.dart';
+import 'leaderboard.dart';
+import 'members.dart';
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -25,10 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
 
+
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'user');
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new MemberInfo()),
+              );
             },
             icon: Icon(
               Icons.account_circle,
@@ -37,6 +48,96 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+            canvasColor: Color.fromRGBO(255, 255, 255, 255),
+            primaryColor: Colors.red,
+            textTheme: Theme.of(context)
+                .textTheme
+                .copyWith(caption: TextStyle(color: Colors.black))),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              currentIndex: 0,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new HomeScreen()),
+                        );
+                      },
+                      icon: Icon(Icons.home),
+                      color: Colors.white,
+                      iconSize: 30,
+                    ),
+                  ),
+
+                  backgroundColor: Color(0xFF143B40),
+                  // ignore: deprecated_member_use
+                  title: Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Leaderboard()),
+                      );
+                    },
+                    icon: Icon(Icons.leaderboard),
+                    color: Colors.white,
+                    iconSize: 30,
+                  ),
+                  // ignore: deprecated_member_use
+                  title: Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Achievement()),
+                      );
+                    },
+                    icon: Icon(Icons.emoji_events_rounded),
+                    color: Colors.white,
+                    iconSize: 30,
+                  ),
+
+                  // ignore: deprecated_member_use
+                  title: Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Members()),
+                      );
+                    },
+                    icon: Icon(Icons.group_rounded),
+                    color: Colors.white,
+                    iconSize: 30,
+                  ),
+                  // ignore: deprecated_member_use
+                  title: Text(''),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -65,7 +166,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'gallery');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new gallery()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -100,7 +205,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, 'alumni');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Alumni()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -134,7 +243,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, 'record');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Records()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -168,7 +281,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, 'memberlist');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Members()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -202,7 +319,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, 'achievement');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Achievement()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -236,7 +357,11 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, 'leaderboard');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new Leaderboard()),
+                  );
                 },
                 child: Row(
                   children: [
@@ -260,67 +385,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'homescreen');
-                },
-                icon: Icon(Icons.home),
-                color: Colors.white,
-                iconSize: 30,
-              ),
-            ),
-
-            backgroundColor: Color(0xFF143B40),
-            // ignore: deprecated_member_use
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'leaderboard');
-              },
-              icon: Icon(Icons.leaderboard),
-              color: Colors.white,
-              iconSize: 30,
-            ),
-            // ignore: deprecated_member_use
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'achievement');
-              },
-              icon: Icon(Icons.emoji_events_rounded),
-              color: Colors.white,
-              iconSize: 30,
-            ),
-
-            // ignore: deprecated_member_use
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'memberlist');
-              },
-              icon: Icon(Icons.group_rounded),
-              color: Colors.white,
-              iconSize: 30,
-            ),
-            // ignore: deprecated_member_use
-            title: Text(''),
-          ),
-        ],
       ),
     );
   }

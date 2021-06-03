@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'loginscreeen.dart';
+
 class WelcomeScreen extends StatefulWidget {
 
   @override
@@ -12,8 +14,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
   super.initState();
   new Future.delayed(const Duration(seconds: 3), () {
-  Navigator.pushNamed(context, 'login');
-  });
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+          builder: (context) => new login()),
+    );
+  },);
   }
 
   @override

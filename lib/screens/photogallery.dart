@@ -1,12 +1,18 @@
 import 'dart:ffi';
 import 'dart:typed_data';
 
+import 'package:athletics_app/screens/userinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'achievements.dart';
 import 'dataHolder.dart';
 // import 'package:transparent_image/transparent_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+import 'homescreen.dart';
+import 'leaderboard.dart';
+import 'members.dart';
 
 
 CollectionReference imgRef;
@@ -46,7 +52,10 @@ class _galleryState extends State<gallery> {
         centerTitle: true,
         leading: FlatButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'homescreen');
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new HomeScreen()),
+            );
           },
           child: Icon(
             Icons.arrow_back_sharp,
@@ -57,7 +66,10 @@ class _galleryState extends State<gallery> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'user');
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new MemberInfo()),
+              );
             },
             icon: Icon(
               Icons.account_circle,
@@ -67,21 +79,6 @@ class _galleryState extends State<gallery> {
           ),
         ],
       ),
-      body: Container(
-
-        // constraints: BoxConstraints.expand(),
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage("assets/athlete.jpeg"),
-        //     fit: BoxFit.fill,
-        //   ),
-        // ),
-        child: makeItemGrid(
-        ),
-
-      ),
-
-
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
             canvasColor: Color.fromRGBO(255, 255, 255, 255),
@@ -102,7 +99,11 @@ class _galleryState extends State<gallery> {
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'homescreen');
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new HomeScreen()),
+                        );
                       },
                       icon: Icon(Icons.home),
                       color: Colors.white,
@@ -117,7 +118,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'leaderboard');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Leaderboard()),
+                      );
                     },
                     icon: Icon(Icons.leaderboard),
                     color: Colors.white,
@@ -129,7 +134,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'achievement');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Achievement()),
+                      );
                     },
                     icon: Icon(Icons.emoji_events_rounded),
                     color: Colors.white,
@@ -142,7 +151,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'memberlist');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Members()),
+                      );
                     },
                     icon: Icon(Icons.group_rounded),
                     color: Colors.white,
@@ -156,6 +169,22 @@ class _galleryState extends State<gallery> {
           ),
         ),
       ),
+      body: Container(
+
+        // constraints: BoxConstraints.expand(),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage("assets/athlete.jpeg"),
+        //     fit: BoxFit.fill,
+        //   ),
+        // ),
+        child: makeItemGrid(
+        ),
+
+      ),
+
+
+
     );
 
   }

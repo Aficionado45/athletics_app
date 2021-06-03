@@ -1,5 +1,10 @@
+import 'package:athletics_app/screens/achievements.dart';
+import 'package:athletics_app/screens/leaderboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'homescreen.dart';
+import 'members.dart';
 
 class MemberInfo extends StatefulWidget {
   @override
@@ -24,7 +29,10 @@ class _MemberInfoState extends State<MemberInfo> {
         centerTitle: true,
         leading: FlatButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'homescreen');
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new HomeScreen()),
+            );
           },
           child: Icon(
             Icons.arrow_back_sharp,
@@ -34,11 +42,13 @@ class _MemberInfoState extends State<MemberInfo> {
         ),
         actions: [
           IconButton(
-            onPressed: (){
-              Navigator.pushNamed(context, 'user');
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new MemberInfo()),
+              );
             },
             icon: Icon(
-
               Icons.account_circle,
               color: Colors.white,
               size: 30,
@@ -227,10 +237,10 @@ class _MemberInfoState extends State<MemberInfo> {
                     onPressed: () {},
                     child: Container(
                         child: Image.asset(
-                          'assets/fb.jpg',
-                          height: 52,
-                          width: 52,
-                        )),
+                      'assets/fb.jpg',
+                      height: 52,
+                      width: 52,
+                    )),
                   ),
 
                   // ignore: deprecated_member_use
@@ -238,10 +248,10 @@ class _MemberInfoState extends State<MemberInfo> {
                     onPressed: () {},
                     child: Container(
                         child: Image.asset(
-                          'assets/insta.png',
-                          height: 40,
-                          width: 40,
-                        )),
+                      'assets/insta.png',
+                      height: 40,
+                      width: 40,
+                    )),
                   ),
                 ],
               ),
@@ -269,7 +279,11 @@ class _MemberInfoState extends State<MemberInfo> {
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'homescreen');
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new HomeScreen()),
+                        );
                       },
                       icon: Icon(Icons.home),
                       color: Colors.white,
@@ -284,7 +298,11 @@ class _MemberInfoState extends State<MemberInfo> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'leaderboard');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Leaderboard()),
+                      );
                     },
                     icon: Icon(Icons.leaderboard),
                     color: Colors.white,
@@ -296,7 +314,11 @@ class _MemberInfoState extends State<MemberInfo> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'achievement');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Achievement()),
+                      );
                     },
                     icon: Icon(Icons.emoji_events_rounded),
                     color: Colors.white,
@@ -309,7 +331,11 @@ class _MemberInfoState extends State<MemberInfo> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'memberlist');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Members()),
+                      );
                     },
                     icon: Icon(Icons.group_rounded),
                     color: Colors.white,

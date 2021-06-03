@@ -1,67 +1,20 @@
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
+import 'memberScreen.dart';
 import 'members.dart';
 
-_launchURL1() async {
-  const url = 'https://drive.google.com/drive/folders/1wG0M66F_kbf9vsxh-SjREeAWC82afEjU?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: true, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURL2() async {
-  const url = 'https://drive.google.com/drive/folders/1CzxD1xFHyIhiwuEgvxo-fTs65U3wVHf_?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: true, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURL3() async {
-  const url = 'https://drive.google.com/drive/folders/1D6KH7U4eJmZGFgriLNHJI46-mVPWToHH?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: true, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURL4() async {
-  const url = 'https://drive.google.com/drive/folders/19kgHu051J_N0oJMSPKiJGk_Ax_cJmvlh?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: true, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchURL5() async {
-  const url = 'https://drive.google.com/file/d/1kSnfujE6EyrkCPvmL-HhT6JifNfANP7M/view?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url, forceSafariVC: true, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-
-
-class Records extends StatefulWidget {
+class Statistics extends StatefulWidget {
   @override
-  _RecordsState createState() => _RecordsState();
+  _StatisticsState createState() => _StatisticsState();
 }
 
-class _RecordsState extends State<Records> {
-  int _currentindex=0;
+class _StatisticsState extends State<Statistics> {
+  int _currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +23,7 @@ class _RecordsState extends State<Records> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Records',
+            'Statistics',
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
@@ -81,7 +34,7 @@ class _RecordsState extends State<Records> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+                new MaterialPageRoute(builder: (context) => new MemberScreen()),
               );
             },
             child: Icon(
@@ -199,109 +152,74 @@ class _RecordsState extends State<Records> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background.jpeg"),
-              fit: BoxFit.fill,
-            ),
+                image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  height: 59,
-                  width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 128, 12),
+          child: Column(
+            children: [
+
+              Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF143B40),
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: FlatButton(
-                    onPressed: _launchURL1,
-                    child: Text('Inter IIT',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
-                    ),
+                  alignment: FractionalOffset.centerLeft,
+                  width: 400,
+                  height: 30),
+              SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topCenter,
+                width: 320,
+                height: 160,
+                child: Text(
+                  'Current Timing',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
                   ),
                 ),
-
-                Container(
-                  height: 59,
-                  width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 155, 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: FlatButton(
-                    onPressed: _launchURL2,
-                    child: Text('Spirit',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
-                    ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topCenter,
+                width: 320,
+                height: 160,
+                child: Text(
+                  'Personal Best',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
                   ),
                 ),
-
-                Container(
-                  height: 59,
-                  width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 122, 13),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: FlatButton(
-                    onPressed: _launchURL3,
-                    child: Text('Spardha',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
-                    ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topCenter,
+                width: 320,
+                height: 160,
+                child: Text(
+                  'All Trials',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
                   ),
                 ),
-
-                Container(
-                  height: 59,
-                  width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 12, 59, 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF143B40),
-                  ),
-                  child: FlatButton(
-                    onPressed: _launchURL4,
-                    child: Text('Cross Country',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
-                    ),
-                  ),
-                ),
-
-                Container(
-                  height: 59,
-                  width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 106, 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF143B40),
-                  ),
-
-                  child: FlatButton(
-                    onPressed: _launchURL5,
-                    child: Text('All Others',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      ) ,
+      ),
     );
   }
 }
