@@ -58,9 +58,8 @@ class _MyAppState extends State<MyApp> {
         'daily':(context)=>DailyPracticeRecords(),
         'memberAchievement':(context) => MemberAchievement(),
 
-
-  
-
+      },
+    ),
     },
     );
   }
