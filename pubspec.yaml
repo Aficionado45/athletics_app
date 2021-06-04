@@ -34,6 +34,9 @@ dependencies:
   firebase_auth: ^0.18.0+1
   firebase_core: ^0.5.0
   provider: ^4.3.2+1
+  cloud_firestore: ^0.14.3
+  transparent_image: ^1.0.0
+  firebase_storage: ^5.1.0
 
 dev_dependencies:
   flutter_test:
