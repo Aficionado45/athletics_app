@@ -23,7 +23,10 @@ class _AchievementState extends State<Achievement> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Achievements',
+
+
+            'Achievement',
+
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
