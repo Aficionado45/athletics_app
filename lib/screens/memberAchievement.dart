@@ -8,12 +8,12 @@ import 'leaderboard.dart';
 import 'memberScreen.dart';
 import 'members.dart';
 
-class Achievement extends StatefulWidget {
+class MemberAchievement extends StatefulWidget {
   @override
-  _AchievementState createState() => _AchievementState();
+  _MemberAchievementState createState() => _MemberAchievementState();
 }
 
-class _AchievementState extends State<Achievement> {
+class _MemberAchievementState extends State<MemberAchievement> {
   int _currentindex = 0;
 
   @override
@@ -23,7 +23,7 @@ class _AchievementState extends State<Achievement> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Achievements',
+            'Achievement',
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
@@ -34,7 +34,7 @@ class _AchievementState extends State<Achievement> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+                new MaterialPageRoute(builder: (context) => new MemberScreen()),
               );
             },
             child: Icon(
@@ -153,6 +153,85 @@ class _AchievementState extends State<Achievement> {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
+          ),
+          child: Column(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  alignment: FractionalOffset.centerLeft,
+                  width: 400,
+                  height: 10),
+              SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topLeft,
+                width: 320,
+                height: 100,
+                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('assets/logo.png'),
+                      radius: 40,
+                    ),
+
+                    // Icons.image,
+                    // color: Colors.white,
+                    // size: 30,
+                    SizedBox(width: 30.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        ),
+                        Text(
+                          'Name',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          'Batch',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  alignment: FractionalOffset.centerLeft,
+                  width: 400,
+                  height: 30),
+              SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topLeft,
+                width: 320,
+                height: 400,
+              ),
+            ],
           ),
         ),
       ),

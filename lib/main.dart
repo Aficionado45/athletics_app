@@ -20,6 +20,7 @@ import 'screens/members.dart';
 import 'screens/Alumni.dart';
 import 'screens/Statistics.dart';
 import 'screens/DailyPracticeRecords.dart';
+import 'screens/memberAchievement.dart';
 import 'screens/Attendance.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         'attendance':(context)=>Attendance(),
         'stats':(context)=>Statistics(),
         'daily':(context)=>DailyPracticeRecords(),
+        'memberAchievement':(context) => MemberAchievement(),
 
 
   

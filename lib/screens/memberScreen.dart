@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
+import 'memberAchievement.dart';
 
 class MemberScreen extends StatefulWidget {
 
@@ -167,7 +168,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new Achievement()),
+                                builder: (context) => new MemberAchievement()),
                           );
                         },
                         child: Text(
