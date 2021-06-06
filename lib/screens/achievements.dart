@@ -158,12 +158,63 @@ class _AchievementState extends State<Achievement> {
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
           child: StreamBuilder(
-            stream: Firestore.instance.collection('achievements').snapshots(),
+            stream: FirebaseFirestore.instance.collection('achievements').snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-              if(!snapshot.hasData)
-                return Center( child: CircularProgressIndicator(),
+              if(!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator(),
                 );
-              return Center(
+              }
+              return ListView(
+              children: snapshot.data.docs.map((doc) {
+                return Container(
+                  width: 350,
+                  height: 312,
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      color: Color(0xFF143B40),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Column(
+                      children: [
+                        Text(doc['TITLE'],
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Text(doc['DESCRIPTION'],
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text(doc['RECORDS'],
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(doc['RECORDS 1'],
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                      ]
+                  ),
+                );
+              }).toList(),
+              );
+              /*return Center(
                 child: ListView(
                   //child: Column(
                   children: [
@@ -359,7 +410,7 @@ class _AchievementState extends State<Achievement> {
                     ),
                   ],
                 ),
-              );
+              );*/
             },
           ),
         ),
