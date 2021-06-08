@@ -1,17 +1,48 @@
 import 'package:athletics_app/screens/achievements.dart';
 import 'package:athletics_app/screens/leaderboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 
 import 'homescreen.dart';
 import 'members.dart';
 
+User loggedInUser;
 class MemberInfo extends StatefulWidget {
   @override
   _MemberInfoState createState() => _MemberInfoState();
 }
 
 class _MemberInfoState extends State<MemberInfo> {
+  final _auth=FirebaseAuth.instance;
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  String name,email,uid;
+  File file;
+  void getCurrentUser()async{
+    try{
+      final user=_auth.currentUser;
+      if(user!=null){
+        loggedInUser=user;
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+
+  void initState(){
+    super.initState();
+    getCurrentUser();
+  }
+Future<void> userdata() async{
+    final uid= loggedInUser.uid;
+    DocumentSnapshot ds= await userCollection.doc(uid).get();
+    name=ds.get('name');
+    email=ds.get('email');
+
+  }
   int _currentindex = 0;
 
   @override
@@ -85,22 +116,16 @@ class _MemberInfoState extends State<MemberInfo> {
               // ignore: deprecated_member_use
               child: Row(
                 children: [
-                  Text(
-                    'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 21,
-                    ),
+                  FutureBuilder(
+                    future: userdata(),
+                    builder: (context,snapshot){
+                      if(snapshot.connectionState!=ConnectionState.done)
+                        return Text("Loading");
+                      return Text("$name");
+                    },
                   ),
                   Padding(padding: EdgeInsets.fromLTRB(110, 0, 0, 0)),
-                  FlatButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.edit,
-                      size: 30,
-                      color: Colors.white, // add custom icons also
-                    ),
-                  )
+
                 ],
               ),
             ),
@@ -114,7 +139,7 @@ class _MemberInfoState extends State<MemberInfo> {
               ),
               alignment: FractionalOffset.centerLeft,
               width: 303,
-              height: 59,
+              height: 55,
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
               child: Text(
                 'Email',
@@ -134,7 +159,7 @@ class _MemberInfoState extends State<MemberInfo> {
               ),
               alignment: FractionalOffset.centerLeft,
               width: 303,
-              height: 59,
+              height: 55,
 
               padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -159,7 +184,7 @@ class _MemberInfoState extends State<MemberInfo> {
               ),
               alignment: FractionalOffset.centerLeft,
               width: 303,
-              height: 50,
+              height: 55,
 
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -197,11 +222,14 @@ class _MemberInfoState extends State<MemberInfo> {
               ),
               alignment: FractionalOffset.center,
               width: 303,
-              height: 59,
+              height: 55,
 
               // ignore: deprecated_member_use
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  _auth.signOut();
+                  Navigator.pushNamed(context,'login');
+                },
                 child: Text(
                   'Log out',
                   style: TextStyle(
@@ -217,7 +245,7 @@ class _MemberInfoState extends State<MemberInfo> {
             Container(
               alignment: FractionalOffset.center,
               width: 303,
-              height: 59,
+              height: 55,
               color: Colors.transparent,
               child: Text(
                 'Follow us on',
