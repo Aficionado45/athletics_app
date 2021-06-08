@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:athletics_app/screens/homescreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'achievements.dart';
 
 class login extends StatefulWidget {
   @override
@@ -172,7 +175,11 @@ class _loginState extends State<login> {
                       try{
                         final user= await _auth.signInWithEmailAndPassword(email: email, password: password);
                         if(user!=null){
-                          Navigator.pushNamed(context,'homescreen');
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new HomeScreen()),
+                          );
                         }
                       }      catch(e){
                         print(e);

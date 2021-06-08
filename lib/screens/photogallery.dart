@@ -1,4 +1,21 @@
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:athletics_app/screens/userinfo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'achievements.dart';
+import 'dataHolder.dart';
+// import 'package:transparent_image/transparent_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'homescreen.dart';
+import 'leaderboard.dart';
+import 'members.dart';
+
+
+CollectionReference imgRef;
 
 class gallery extends StatefulWidget {
   @override
@@ -8,9 +25,21 @@ class gallery extends StatefulWidget {
 class _galleryState extends State<gallery> {
   int _currentindex = 0;
 
+
+  Widget makeItemGrid(){
+    return GridView.builder(
+      padding: EdgeInsets.all(4),
+      itemCount: 44,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 4,crossAxisSpacing: 4),
+      itemBuilder: (context,index){
+        return ImageGridItem(index+1);
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
         backgroundColor: Color(0xFF143B40),
         title: Text(
@@ -23,7 +52,10 @@ class _galleryState extends State<gallery> {
         centerTitle: true,
         leading: FlatButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'homescreen');
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new HomeScreen()),
+            );
           },
           child: Icon(
             Icons.arrow_back_sharp,
@@ -34,7 +66,10 @@ class _galleryState extends State<gallery> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'user');
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new MemberInfo()),
+              );
             },
             icon: Icon(
               Icons.account_circle,
@@ -43,15 +78,6 @@ class _galleryState extends State<gallery> {
             ),
           ),
         ],
-      ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/athlete.jpeg"),
-            fit: BoxFit.fill,
-          ),
-        ),
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
@@ -73,7 +99,11 @@ class _galleryState extends State<gallery> {
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'homescreen');
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new HomeScreen()),
+                        );
                       },
                       icon: Icon(Icons.home),
                       color: Colors.white,
@@ -88,7 +118,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'leaderboard');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Leaderboard()),
+                      );
                     },
                     icon: Icon(Icons.leaderboard),
                     color: Colors.white,
@@ -100,7 +134,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'achievement');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Achievement()),
+                      );
                     },
                     icon: Icon(Icons.emoji_events_rounded),
                     color: Colors.white,
@@ -113,7 +151,11 @@ class _galleryState extends State<gallery> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'memberlist');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new Members()),
+                      );
                     },
                     icon: Icon(Icons.group_rounded),
                     color: Colors.white,
@@ -127,6 +169,81 @@ class _galleryState extends State<gallery> {
           ),
         ),
       ),
+      body: Container(
+
+        // constraints: BoxConstraints.expand(),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage("assets/athlete.jpeg"),
+        //     fit: BoxFit.fill,
+        //   ),
+        // ),
+        child: makeItemGrid(
+        ),
+
+      ),
+
+
+
     );
+
   }
 }
+
+class ImageGridItem extends StatefulWidget {
+  int _index;
+  ImageGridItem(int index){
+    this._index=index;
+  }
+
+  @override
+  _ImageGridItemState createState() => _ImageGridItemState();
+}
+
+class _ImageGridItemState extends State<ImageGridItem> {
+  Uint8List imagefile;
+  Reference photorefernce = FirebaseStorage.instance.ref().child("TeamPhotos");
+
+  getImage(){
+    if(!requestedIndexes.contains(widget._index)){
+      int Max_size = 30*1024*1024;
+
+      photorefernce.child("image_${widget._index}.jpg").getData(Max_size).then((data){
+        this.setState(() {
+          imagefile =data;
+        });
+        imageData.putIfAbsent(widget._index, ()
+        {
+          return data;
+        });
+      }).catchError((error){
+        // debugPrint(error.toStrings());
+      });
+      requestedIndexes.add(widget._index);
+    }
+  }
+  Widget decideGridTileWidget(){
+    if(imagefile==null){
+      return Center(child: Text("No Data") );
+    }else{
+      return Image.memory(imagefile,fit: BoxFit.fill,);
+    }
+  }
+  @override
+  Void initState(){
+    super.initState();
+    if(!imageData.containsKey(widget._index)){
+      getImage();
+    }else{
+      this.setState(() {
+        imagefile=imageData[widget._index];
+      });
+
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return GridTile(child: decideGridTileWidget());
+  }
+}
+
