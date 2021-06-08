@@ -5,7 +5,6 @@ import 'package:athletics_app/screens/members.dart';
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';

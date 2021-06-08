@@ -59,8 +59,6 @@ class _MyAppState extends State<MyApp> {
         'memberAchievement':(context) => MemberAchievement(),
 
       },
-    ),
-    },
     );
   }
 }
