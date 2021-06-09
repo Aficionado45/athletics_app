@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 import 'homescreen.dart';
@@ -109,7 +108,7 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 303,
+              width: 340,
               height: 59,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
@@ -121,7 +120,11 @@ Future<void> userdata() async{
                     builder: (context,snapshot){
                       if(snapshot.connectionState!=ConnectionState.done)
                         return Text("Loading");
-                      return Text("$name");
+                      return Text("$name",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 21,
+                      ),);
                     },
                   ),
                   Padding(padding: EdgeInsets.fromLTRB(110, 0, 0, 0)),
@@ -138,15 +141,28 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 303,
-              height: 55,
+              width: 340,
+              height: 59,
+
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-              child: Text(
-                'Email',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 21,
-                ),
+              // ignore: deprecated_member_use
+              child: Row(
+                children: [
+                  FutureBuilder(
+                    future: userdata(),
+                    builder: (context,snapshot){
+                      if(snapshot.connectionState!=ConnectionState.done)
+                        return Text("Loading");
+                      return Text("$email",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 21,
+                        ),);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(110, 0, 0, 0)),
+
+                ],
               ),
             ),
             SizedBox(
@@ -158,7 +174,7 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 303,
+              width: 340,
               height: 55,
 
               padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
@@ -183,7 +199,7 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 303,
+              width: 340,
               height: 55,
 
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
@@ -191,7 +207,9 @@ Future<void> userdata() async{
               child: Row(
                 children: [
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context,'daily');
+                    },
                     child: Text(
                       'Daily Records',
                       style: TextStyle(
@@ -200,7 +218,7 @@ Future<void> userdata() async{
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsets.fromLTRB(29, 0, 0, 0)),
+                  Padding(padding: EdgeInsets.fromLTRB(70, 0, 0, 0)),
                   FlatButton(
                     onPressed: () {},
                     child: Icon(
@@ -221,7 +239,7 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.center,
-              width: 303,
+              width: 340,
               height: 55,
 
               // ignore: deprecated_member_use
