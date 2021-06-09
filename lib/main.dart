@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
      return MaterialApp(
-      initialRoute: 'homescreen',
+      initialRoute: 'login',
       routes: {
         //Add all the page navigation references here to navigate across screens.
         'user':(context) => MemberInfo(),
@@ -59,8 +59,8 @@ class _MyAppState extends State<MyApp> {
         'memberAchievement':(context) => MemberAchievement(),
 
       },
-    ),
-    },
     );
+    }
+
   }
-}
+

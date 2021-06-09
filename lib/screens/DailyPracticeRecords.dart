@@ -149,7 +149,8 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
             ),
           ),
         ),
-        body: Container(
+        body:SingleChildScrollView(
+          child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
@@ -233,6 +234,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );

@@ -67,7 +67,8 @@ class _MemberScreenState extends State<MemberScreen> {
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
             children: [
               Container(
                   decoration: BoxDecoration(
@@ -265,6 +266,7 @@ class _MemberScreenState extends State<MemberScreen> {
                 ),
               ),
             ],
+          ),
           ),
         ),
         bottomNavigationBar: Theme(
