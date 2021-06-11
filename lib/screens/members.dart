@@ -5,7 +5,7 @@ import 'package:athletics_app/screens/userinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
@@ -19,9 +19,18 @@ class Members extends StatefulWidget {
 
 class _MembersState extends State<Members> {
 
-  String uid;
+  final userCollection =FirebaseFirestore.instance.collection("users");
+   String uid;
+
   @override
   Widget build(BuildContext context) {
+    gotomemberScreen() {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return MemberScreen();
+      },
+      ),
+      );
+    }
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -180,20 +189,23 @@ class _MembersState extends State<Members> {
                           color: Color(0xFF143B40),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
+
                         child: FlatButton(
-                          onPressed: () {
+                          onPressed: gotomemberScreen,
+                          /*() {
                             uid=doc.id;
-                            getuid(uid);
+                            MemberScreen.getuid(uid);
                             Navigator.push(
                               context,
                               new MaterialPageRoute(builder: (context) => new MemberScreen()),
                             );
-                          },
+                          },*/
                           child: Row(children: [
                             CircleAvatar(
                               backgroundImage: AssetImage('assets/logo.png'),
                               radius: 40,
                             ),
+
                             Column(children: [
                               Container(
                                 alignment: FractionalOffset.centerLeft,
