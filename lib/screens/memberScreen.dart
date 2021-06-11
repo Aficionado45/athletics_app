@@ -9,6 +9,7 @@ import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'memberAchievement.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MemberScreen extends StatefulWidget {
 
@@ -17,7 +18,15 @@ class MemberScreen extends StatefulWidget {
 }
 
 class _MemberScreenState extends State<MemberScreen> {
-  @override
+
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  String uid;
+
+ void getuid(String uids)
+ {
+  final uid = uids;
+ }
+    @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(

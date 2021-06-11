@@ -18,6 +18,12 @@ class Members extends StatefulWidget {
 }
 
 class _MembersState extends State<Members> {
+
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  Future<void> userdata() async {
+    final uid = loggedInUser.uid;
+    DocumentSnapshot ds = await userCollection.doc(uid).get();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -169,6 +175,7 @@ class _MembersState extends State<Members> {
                 }
 
                 return ListView(
+
                   children: snapshot.data.docs.map((doc) {
                     return Container(
                       padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
