@@ -19,11 +19,7 @@ class Members extends StatefulWidget {
 
 class _MembersState extends State<Members> {
 
-  final userCollection =FirebaseFirestore.instance.collection("users");
-  Future<void> userdata() async {
-    final uid = loggedInUser.uid;
-    DocumentSnapshot ds = await userCollection.doc(uid).get();
-  }
+  String uid;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -186,6 +182,8 @@ class _MembersState extends State<Members> {
                         ),
                         child: FlatButton(
                           onPressed: () {
+                            uid=doc.id;
+                            getuid(uid);
                             Navigator.push(
                               context,
                               new MaterialPageRoute(builder: (context) => new MemberScreen()),
