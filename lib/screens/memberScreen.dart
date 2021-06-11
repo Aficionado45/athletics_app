@@ -20,12 +20,17 @@ class MemberScreen extends StatefulWidget {
 class _MemberScreenState extends State<MemberScreen> {
 
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String uid;
+  final String uid,name;
+  
+  Future<void> userdata() async{
+    
+    DocumentSnapshot ds= await userCollection.doc(uid).get();
+    name=ds.get('name');
+    email=ds.get('email');
 
- void getuid(String uids)
- {
-  final uid = uids;
- }
+  }
+
+
     @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -113,14 +118,18 @@ class _MemberScreenState extends State<MemberScreen> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         ),
-                        Text(
-                          'Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            letterSpacing: 1.0,
-                          ),
-                        ),
+                         FutureBuilder(
+                    future: userdata(),
+                    builder: (context,snapshot){
+                      if(snapshot.connectionState!=ConnectionState.done)
+                        return Text("Loading");
+                      return Text("$name",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 21,
+                      ),);
+                    },
+                  ),
                         SizedBox(height: 5),
                         Text(
                           'Batch',
