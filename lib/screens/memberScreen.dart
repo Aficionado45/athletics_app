@@ -13,25 +13,25 @@ import 'members.dart';
 
 class MemberScreen extends StatefulWidget {
 
+  final String uid;
+  final String name,batch;
+  MemberScreen({Key key ,@required this.uid, this.name, this.batch}) :super(key: key);
+
+
   @override
   _MemberScreenState createState() => _MemberScreenState();
 }
 
 class _MemberScreenState extends State<MemberScreen> {
 
-  final userCollection =FirebaseFirestore.instance.collection("users");
-  final String uid;
-  String name,batch;
-  _MemberScreenState({@required this.uid, this.name, this.batch});
+
 
   Future<void> userdata() async{
-    
+    final userCollection =FirebaseFirestore.instance.collection("users");
     DocumentSnapshot ds= await userCollection.doc(uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
-
+     name=ds.get('name');
+     batch=ds.get('batch');
   }
-
 
     @override
   Widget build(BuildContext context) {

@@ -5,7 +5,6 @@ import 'package:athletics_app/screens/userinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
@@ -20,13 +19,14 @@ class Members extends StatefulWidget {
 class _MembersState extends State<Members> {
 
   final userCollection =FirebaseFirestore.instance.collection("users");
-   String uid;
+  String uid;
 
   @override
   Widget build(BuildContext context) {
     gotomemberScreen() {
+
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return MemberScreen();
+        return MemberScreen(uid:uid);
       },
       ),
       );
@@ -234,7 +234,6 @@ class _MembersState extends State<Members> {
                         ),
                       ),
                     );
-                    SizedBox(height: 6);
                   }).toList(),
                 );
               }),
