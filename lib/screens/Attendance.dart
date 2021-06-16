@@ -34,7 +34,7 @@ class _AttendanceState extends State<Attendance> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen()),
+                new MaterialPageRoute(builder: (context) => new MemberScreen("Pass UID")),
               );
             },
             child: Icon(

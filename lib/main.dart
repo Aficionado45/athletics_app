@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         'homescreen': (context) => HomeScreen(),
         'memberlist' : (context)=> Members(),
         'alumni':(context)=> Alumni(),
-        'memberScreen':(context)=> MemberScreen(),
+        'memberScreen':(context)=> MemberScreen("Blah Blah"),
         'attendance':(context)=>Attendance(),
         'stats':(context)=>Statistics(),
         'daily':(context)=>DailyPracticeRecords(),

@@ -14,9 +14,7 @@ import 'members.dart';
 class MemberScreen extends StatefulWidget {
 
   final String uid;
-  final String name,batch;
-  MemberScreen({Key key ,@required this.uid, this.name, this.batch}) :super(key: key);
-
+  MemberScreen(this.uid, {Key key}): super(key: key);
 
   @override
   _MemberScreenState createState() => _MemberScreenState();
@@ -24,17 +22,17 @@ class MemberScreen extends StatefulWidget {
 
 class _MemberScreenState extends State<MemberScreen> {
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch,uid;
-
+  String name,batch;
 
   Future<void> userdata() async{
-    DocumentSnapshot ds= await userCollection.doc(uid).get();
+    DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
   }
 
     @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(

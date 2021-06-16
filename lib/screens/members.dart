@@ -9,6 +9,11 @@ import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'memberScreen.dart';
+import 'package:path/path.dart';
+
+import 'memberScreen.dart';
+
+
 
 class Members extends StatefulWidget {
 
@@ -23,14 +28,7 @@ class _MembersState extends State<Members> {
 
   @override
   Widget build(BuildContext context) {
-    gotomemberScreen() {
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return MemberScreen(uid:uid);
-      },
-      ),
-      );
-    }
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -191,15 +189,14 @@ class _MembersState extends State<Members> {
                         ),
 
                         child: FlatButton(
-                          onPressed: gotomemberScreen,
-                          /*() {
+                          onPressed:
+                          () {
                             uid=doc.id;
-                            MemberScreen.getuid(uid);
                             Navigator.push(
                               context,
-                              new MaterialPageRoute(builder: (context) => new MemberScreen()),
+                              new MaterialPageRoute(builder: (context) => new MemberScreen(uid)),
                             );
-                          },*/
+                          },
                           child: Row(children: [
                             CircleAvatar(
                               backgroundImage: AssetImage('assets/logo.png'),
