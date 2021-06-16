@@ -1,54 +1,40 @@
-// import 'dart:html';
-
-import 'package:athletics_app/screens/memberScreen.dart';
 import 'package:athletics_app/screens/userinfo.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'memberScreen.dart';
+import 'members.dart';
 
-class Members extends StatefulWidget {
-
+class AlumniAchieve extends StatefulWidget {
   @override
-  _MembersState createState() => _MembersState();
+  _AlumniAchieveState createState() => _AlumniAchieveState();
 }
 
-class _MembersState extends State<Members> {
-
-  final userCollection =FirebaseFirestore.instance.collection("users");
-  String uid;
+class _AlumniAchieveState extends State<AlumniAchieve> {
+  int _currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
-    gotomemberScreen() {
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return MemberScreen(uid:uid);
-      },
-      ),
-      );
-    }
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            "Members",
+            'Achievement',
             style: TextStyle(
-              color: Colors.white,
               fontSize: 30,
+              color: Colors.white,
             ),
           ),
           centerTitle: true,
-          // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+                new MaterialPageRoute(builder: (context) => new MemberScreen()),
               );
             },
             child: Icon(
@@ -168,75 +154,85 @@ class _MembersState extends State<Members> {
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: StreamBuilder(
-              stream:
-              FirebaseFirestore.instance.collection('users').snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+          child: Column(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  alignment: FractionalOffset.centerLeft,
+                  width: 400,
+                  height: 10),
+              SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topLeft,
+                width: 320,
+                height: 100,
+                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('assets/logo.png'),
+                      radius: 40,
+                    ),
 
-                return ListView(
-
-                  children: snapshot.data.docs.map((doc) {
-                    return Container(
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF143B40),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                    // Icons.image,
+                    // color: Colors.white,
+                    // size: 30,
+                    SizedBox(width: 30.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         ),
-
-                        child: FlatButton(
-                          onPressed: gotomemberScreen,
-                          /*() {
-                            uid=doc.id;
-                            MemberScreen.getuid(uid);
-                            Navigator.push(
-                              context,
-                              new MaterialPageRoute(builder: (context) => new MemberScreen()),
-                            );
-                          },*/
-                          child: Row(children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage('assets/logo.png'),
-                              radius: 40,
-                            ),
-
-                            Column(children: [
-                              Container(
-                                alignment: FractionalOffset.centerLeft,
-                                padding: EdgeInsets.fromLTRB(15, 10, 0, 5),
-                                width: MediaQuery.of(context).size.width / 2.4,
-                                height: MediaQuery.of(context).size.height / 11,
-                                child: Text(
-                                  doc['name'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-                              ),
-                              Container(
-                                alignment: FractionalOffset.centerLeft,
-                                padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
-                                width: MediaQuery.of(context).size.width / 2.5,
-                                height: MediaQuery.of(context).size.height / 18,
-                                child: Text(
-                                  doc['batch'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-                              ),
-                            ]),
-                          ]),
+                        Text(
+                          'Name',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            letterSpacing: 1.0,
+                          ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                );
-              }),
+                        SizedBox(height: 5),
+                        Text(
+                          'Batch',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  alignment: FractionalOffset.centerLeft,
+                  width: 400,
+                  height: 30),
+              SizedBox(height: 15),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF143B40),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.topLeft,
+                width: 320,
+                height: 400,
+              ),
+            ],
+          ),
         ),
       ),
     );

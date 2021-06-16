@@ -1,10 +1,13 @@
+import 'package:athletics_app/screens/AlumniAchievement.dart';
 import 'package:athletics_app/screens/userinfo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
+import 'memberScreen.dart';
 import 'members.dart';
 
 class Alumni extends StatefulWidget {
@@ -154,77 +157,70 @@ class _AlumniState extends State<Alumni> {
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: Column(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  alignment: FractionalOffset.centerLeft,
-                  width: 420,
-                  height: 10),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.topLeft,
-                width: 320,
-                height: 100,
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
-                      radius: 40,
-                    ),
+          child: StreamBuilder(
+              stream:
+              FirebaseFirestore.instance.collection('alumni').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-                    // Icons.image,
-                    // color: Colors.white,
-                    // size: 30,
-                    SizedBox(width: 20.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                return ListView(
+                  children: snapshot.data.docs.map((doc) {
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFF143B40),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        Text(
-                          'Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 26.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0,
-                          ),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(builder: (context) => new AlumniAchieve()),
+                            );
+                          },
+                          child: Row(children: [
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/logo.png'),
+                              radius: 40,
+                            ),
+                            Column(children: [
+                              Container(
+                                alignment: FractionalOffset.centerLeft,
+                                padding: EdgeInsets.fromLTRB(15, 10, 0, 5),
+                                width: MediaQuery.of(context).size.width / 2.4,
+                                height: MediaQuery.of(context).size.height / 11,
+                                child: Text(
+                                  doc.data()['name'],
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                ),
+                              ),
+                              Container(
+                                alignment: FractionalOffset.centerLeft,
+                                padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                height: MediaQuery.of(context).size.height / 18,
+                                child: Text(
+                                  doc.data()['batch'],
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                ),
+                              ),
+                            ]),
+                          ]),
                         ),
-                        Text(
-                          'Batch',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          'Achievements',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            letterSpacing: 1.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                      ),
+                    );
+                    SizedBox(height: 6);
+                  }).toList(),
+                );
+              }),
         ),
       ),
     );

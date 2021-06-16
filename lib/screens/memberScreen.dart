@@ -23,14 +23,14 @@ class MemberScreen extends StatefulWidget {
 }
 
 class _MemberScreenState extends State<MemberScreen> {
-
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  String name,batch,uid;
 
 
   Future<void> userdata() async{
-    final userCollection =FirebaseFirestore.instance.collection("users");
     DocumentSnapshot ds= await userCollection.doc(uid).get();
-     name=ds.get('name');
-     batch=ds.get('batch');
+    name=ds.get('name');
+    batch=ds.get('batch');
   }
 
     @override

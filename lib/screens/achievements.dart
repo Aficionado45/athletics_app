@@ -177,7 +177,7 @@ class _AchievementState extends State<Achievement> {
                   ),
                   child: Column(
                       children: [
-                        Text(doc['TITLE'],
+                        Text(doc.data()['TITLE'],
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
@@ -185,14 +185,14 @@ class _AchievementState extends State<Achievement> {
                           ),
                         ),
                         SizedBox(height: 15),
-                        Text(doc['DESCRIPTION'],
+                        Text(doc.data()['DESCRIPTION'],
                           style: TextStyle(
                               fontSize: 15,
                               color: Colors.white
                           ),
                         ),
                         SizedBox(height: 20),
-                        Text(doc['RECORDS'].replaceAll('\\n','\n'),
+                        Text(doc.data()['RECORDS'].replaceAll('\\n','\n'),
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -201,7 +201,7 @@ class _AchievementState extends State<Achievement> {
                         ),
 
                         SizedBox(height: 10),
-                        Text(doc['RECORDS 1'].replaceAll('\\n','\n'),
+                        Text(doc.data()['RECORDS 1'].replaceAll('\\n','\n'),
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,

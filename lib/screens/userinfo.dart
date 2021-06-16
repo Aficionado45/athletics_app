@@ -108,8 +108,8 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 340,
-              height: 59,
+              width: 350,
+              height: 58,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -141,8 +141,8 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 340,
-              height: 59,
+              width: 350,
+              height: 58,
 
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -174,8 +174,8 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 340,
-              height: 55,
+              width: 350,
+              height: 58,
 
               padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -199,8 +199,8 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 340,
-              height: 55,
+              width: 350,
+              height: 58,
 
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               // ignore: deprecated_member_use
@@ -239,8 +239,8 @@ Future<void> userdata() async{
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.center,
-              width: 340,
-              height: 55,
+              width: 350,
+              height: 58,
 
               // ignore: deprecated_member_use
               child: FlatButton(
@@ -263,7 +263,7 @@ Future<void> userdata() async{
             Container(
               alignment: FractionalOffset.center,
               width: 303,
-              height: 55,
+              height: 58,
               color: Colors.transparent,
               child: Text(
                 'Follow us on',
