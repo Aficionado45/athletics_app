@@ -183,9 +183,9 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   color: Color(0xFF143B40),
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                alignment: FractionalOffset.topLeft,
-                width: 320,
-                height: 100,
+                alignment: FractionalOffset.centerLeft,
+                width: 350,
+                height: 120,
                 padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Row(
                   children: [
@@ -197,12 +197,12 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                     // Icons.image,
                     // color: Colors.white,
                     // size: 30,
-                    SizedBox(width: 30.0),
+                    SizedBox(width: 15.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
                         ),
                         FutureBuilder(
                           future: userdata(),
@@ -216,7 +216,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                               ),);
                           },
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 15),
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
@@ -249,7 +249,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 alignment: FractionalOffset.topLeft,
-                width: 320,
+                width: 350,
                 height: 400,
               ),
             ],

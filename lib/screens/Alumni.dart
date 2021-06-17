@@ -18,6 +18,8 @@ class Alumni extends StatefulWidget {
 }
 
 class _AlumniState extends State<Alumni> {
+  final userCollection =FirebaseFirestore.instance.collection("alumni");
+  String uid;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -179,9 +181,10 @@ class _AlumniState extends State<Alumni> {
                         ),
                         child: FlatButton(
                           onPressed: () {
+                            uid=doc.id;
                             Navigator.push(
                               context,
-                              new MaterialPageRoute(builder: (context) => new AlumniAchieve()),
+                              new MaterialPageRoute(builder: (context) => new AlumniAchieve(uid)),
                             );
                           },
                           child: Row(children: [
