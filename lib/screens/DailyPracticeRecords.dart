@@ -1,7 +1,7 @@
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
@@ -9,11 +9,23 @@ import 'memberScreen.dart';
 import 'members.dart';
 
 class DailyPracticeRecords extends StatefulWidget {
+  final String uid;
+  DailyPracticeRecords(this.uid, {Key key}): super(key: key);
+
   @override
   _DailyPracticeRecordsState createState() => _DailyPracticeRecordsState();
 }
 
 class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  String name,batch;
+
+  Future<void> userdata() async{
+    DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
+    name=ds.get('name');
+    batch=ds.get('batch');
+  }
+
   int _currentindex = 0;
 
   @override
@@ -34,7 +46,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen("Pass UID")),
+                new MaterialPageRoute(builder: (context) => new MemberScreen(widget.uid)),
               );
             },
             child: Icon(
@@ -192,22 +204,30 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         ),
-                        Text(
-                          'Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            letterSpacing: 1.0,
-                          ),
+                        FutureBuilder(
+                          future: userdata(),
+                          builder: (context,snapshot){
+                            if(snapshot.connectionState!=ConnectionState.done)
+                              return Text("Loading");
+                            return Text("$name",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                              ),);
+                          },
                         ),
                         SizedBox(height: 5),
-                        Text(
-                          'Batch',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            letterSpacing: 1.0,
-                          ),
+                        FutureBuilder(
+                          future: userdata(),
+                          builder: (context,snapshot){
+                            if(snapshot.connectionState!=ConnectionState.done)
+                              return Text("Loading");
+                            return Text("$batch",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                              ),);
+                          },
                         ),
                       ],
                     ),

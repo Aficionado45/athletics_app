@@ -34,7 +34,7 @@ class _StatisticsState extends State<Statistics> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen("Pass UID")),
+                new MaterialPageRoute(builder: (context) => new MemberScreen('Pass UID')),
               );
             },
             child: Icon(

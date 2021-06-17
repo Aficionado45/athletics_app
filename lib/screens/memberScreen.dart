@@ -190,7 +190,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new MemberAchievement()),
+                                builder: (context) => new MemberAchievement(widget.uid)),
                           );
                         },
                         child: Text(
@@ -217,7 +217,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new Attendance()),
+                                builder: (context) => new Attendance(widget.uid)),
                           );
                         },
                         child: Text(
@@ -271,7 +271,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new DailyPracticeRecords()),
+                                builder: (context) => new DailyPracticeRecords(widget.uid)),
                           );
                         },
                         child: Text(
