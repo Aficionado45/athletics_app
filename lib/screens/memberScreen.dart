@@ -23,11 +23,13 @@ class MemberScreen extends StatefulWidget {
 class _MemberScreenState extends State<MemberScreen> {
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,batch;
-
+  List<String> achieve;
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
+    achieve=List.from(ds.get('achieve'));
+    print(achieve);
   }
 
     @override
@@ -183,9 +185,18 @@ class _MemberScreenState extends State<MemberScreen> {
                       ),
                       alignment: FractionalOffset.centerLeft,
                       width: 320,
-                      height: 55,
+                      height: 200,             //change it back to 55
                       padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
+                      child:ListView.builder(
+                        itemCount: achieve.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text('${achieve[index]}'),
+                          );
+                        },
+                      ),
+
+                      /*FlatButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -200,7 +211,9 @@ class _MemberScreenState extends State<MemberScreen> {
                             color: Colors.grey[850],
                           ),
                         ),
-                      ),
+                      ),*/
+
+
                     ),
                     SizedBox(height: 30),
                     Container(
@@ -210,9 +223,9 @@ class _MemberScreenState extends State<MemberScreen> {
                       ),
                       alignment: FractionalOffset.centerLeft,
                       width: 320,
-                      height: 55,
+                      height: 200,
                       padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
+                      child:FlatButton(
                         onPressed: () {
                           Navigator.push(
                             context,
