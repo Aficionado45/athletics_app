@@ -99,9 +99,9 @@ class _MemberScreenState extends State<MemberScreen> {
                   color: Color(0xFF143B40),
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                alignment: FractionalOffset.topLeft,
-                width: 320,
-                height: 100,
+                alignment: FractionalOffset.centerLeft,
+                width: 350,
+                height: 120,
                 padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Row(
                   children: [
@@ -113,12 +113,12 @@ class _MemberScreenState extends State<MemberScreen> {
                     // Icons.image,
                     // color: Colors.white,
                     // size: 30,
-                    SizedBox(width: 30.0),
+                    SizedBox(width: 15.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
                         ),
                          FutureBuilder(
                             future: userdata(),
@@ -132,7 +132,7 @@ class _MemberScreenState extends State<MemberScreen> {
                               ),);
                             },
                           ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 15),
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
@@ -165,7 +165,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 alignment: FractionalOffset.topLeft,
-                width: 320,
+                width: 350,
                 height: 400,
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Column(
@@ -201,7 +201,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new MemberAchievement()),
+                                builder: (context) => new MemberAchievement(widget.uid)),
                           );
                         },
                         child: Text(
@@ -230,7 +230,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new Attendance()),
+                                builder: (context) => new Attendance(widget.uid)),
                           );
                         },
                         child: Text(
@@ -284,7 +284,7 @@ class _MemberScreenState extends State<MemberScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new DailyPracticeRecords()),
+                                builder: (context) => new DailyPracticeRecords(widget.uid)),
                           );
                         },
                         child: Text(

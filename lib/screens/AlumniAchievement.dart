@@ -1,7 +1,8 @@
+import 'package:athletics_app/screens/Alumni.dart';
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
@@ -9,11 +10,23 @@ import 'memberScreen.dart';
 import 'members.dart';
 
 class AlumniAchieve extends StatefulWidget {
+  final String uid;
+  AlumniAchieve(this.uid, {Key key}): super(key: key);
+
   @override
   _AlumniAchieveState createState() => _AlumniAchieveState();
 }
 
 class _AlumniAchieveState extends State<AlumniAchieve> {
+  final userCollection =FirebaseFirestore.instance.collection("alumni");
+  String name,batch;
+
+  Future<void> userdata() async{
+    DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
+    name=ds.get('name');
+    batch=ds.get('batch');
+  }
+
   int _currentindex = 0;
 
   @override
@@ -34,7 +47,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen("Pass UID")),
+                new MaterialPageRoute(builder: (context) => new Alumni()),
               );
             },
             child: Icon(
@@ -149,89 +162,99 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
             ),
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
-          ),
-          child: Column(
-            children: [
-              Container(
+        body:SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
+            ),
+            child: Column(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 10),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 10),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.topLeft,
-                width: 320,
-                height: 100,
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
-                      radius: 40,
-                    ),
+                  width: 350,
+                  height: 120,
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/logo.png'),
+                        radius: 40,
+                      ),
 
-                    // Icons.image,
-                    // color: Colors.white,
-                    // size: 30,
-                    SizedBox(width: 30.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        ),
-                        Text(
-                          'Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            letterSpacing: 1.0,
+                      // Icons.image,
+                      // color: Colors.white,
+                      // size: 30,
+                      SizedBox(width: 15.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          'Batch',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            letterSpacing: 1.0,
+                          FutureBuilder(
+                            future: userdata(),
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
+                              return Text("$name",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
+                            },
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          SizedBox(height: 15),
+                          FutureBuilder(
+                            future: userdata(),
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
+                              return Text("$batch",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 30),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 30),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  alignment: FractionalOffset.topLeft,
+                  width: 350,
+                  height: 400,
                 ),
-                alignment: FractionalOffset.topLeft,
-                width: 320,
-                height: 400,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

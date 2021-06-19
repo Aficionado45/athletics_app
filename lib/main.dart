@@ -1,4 +1,5 @@
 import 'package:athletics_app/screens/Alumni.dart';
+import 'package:athletics_app/screens/AlumniAchievement.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,10 +54,11 @@ class _MyAppState extends State<MyApp> {
         'memberlist' : (context)=> Members(),
         'alumni':(context)=> Alumni(),
         'memberScreen':(context)=> MemberScreen("Blah Blah"),
-        'attendance':(context)=>Attendance(),
+        'attendance':(context)=>Attendance('Pass UID'),
         'stats':(context)=>Statistics(),
-        'daily':(context)=>DailyPracticeRecords(),
-        'memberAchievement':(context) => MemberAchievement(),
+        'daily':(context)=>DailyPracticeRecords('Pass UID'),
+        'memberAchievement':(context) => MemberAchievement('Pass UID'),
+        'alumniAchieve':(context)=> AlumniAchieve('pass uid'),
 
       },
     );
