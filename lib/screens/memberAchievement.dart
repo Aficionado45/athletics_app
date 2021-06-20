@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,24 +14,31 @@ import 'members.dart';
 class MemberAchievement extends StatefulWidget {
   final String uid;
   MemberAchievement(this.uid, {Key key}): super(key: key);
+
   @override
   _MemberAchievementState createState() => _MemberAchievementState();
 }
 
+
+
 class _MemberAchievementState extends State<MemberAchievement> {
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,batch;
-
+  List <String> achieve=[];
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
+    achieve=List.from(ds.get('achieve'));
+    print(achieve);
   }
 
   int _currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -166,92 +176,116 @@ class _MemberAchievementState extends State<MemberAchievement> {
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: Column(
-            children: [
-              Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 10),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 10),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.centerLeft,
-                width: 350,
-                height: 120,
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
-                      radius: 40,
-                    ),
+                  width: 350,
+                  height: 120,
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/logo.png'),
+                        radius: 40,
+                      ),
 
-                    // Icons.image,
-                    // color: Colors.white,
-                    // size: 30,
-                    SizedBox(width: 15.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                        ),
-                        FutureBuilder(
-                          future: userdata(),
-                          builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
-                            return Text("$name",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 21,
-                              ),);
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        FutureBuilder(
-                          future: userdata(),
-                          builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
-                            return Text("$batch",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 21,
-                              ),);
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                      // Icons.image,
+                      // color: Colors.white,
+                      // size: 30,
+                      SizedBox(width: 15.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+                          ),
+                          FutureBuilder(
+                            future: userdata(),
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
+                              return Text("$name",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
+                            },
+                          ),
+                          SizedBox(height: 15),
+                          FutureBuilder(
+                            future: userdata(),
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
+                              return Text("$batch",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 30
+                ),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 30),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  alignment: FractionalOffset.topLeft,
+                  width: 350,
+                  height: 350,
+                  padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
+                  child: FutureBuilder(
+                    future: userdata(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done)
+                        return Text("Loading");
+                      return ListView.builder(
+                        itemCount: achieve.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text('${achieve[index]}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
-                alignment: FractionalOffset.topLeft,
-                width: 350,
-                height: 400,
-              ),
-            ],
+              ]
+            ),
           ),
         ),
       ),

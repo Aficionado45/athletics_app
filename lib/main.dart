@@ -55,11 +55,9 @@ class _MyAppState extends State<MyApp> {
         'alumni':(context)=> Alumni(),
         'memberScreen':(context)=> MemberScreen("blah blah"),
         'attendance':(context)=>Attendance('Pass UID'),
-        'stats':(context)=>Statistics(),
+        'stats':(context)=>Statistics('Pass UID'),
         'daily':(context)=>DailyPracticeRecords('Pass UID'),
-        'memberAchievement':(context) => MemberAchievement('Pass UID'),
         'precord':(context) => precord(),
-
 
 
       },

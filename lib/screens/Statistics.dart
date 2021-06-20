@@ -9,6 +9,8 @@ import 'memberScreen.dart';
 import 'members.dart';
 
 class Statistics extends StatefulWidget {
+  final String uid;
+  Statistics(this.uid, {Key key}): super(key: key);
   @override
   _StatisticsState createState() => _StatisticsState();
 }
