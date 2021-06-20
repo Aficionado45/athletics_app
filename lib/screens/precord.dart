@@ -9,27 +9,42 @@ import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'memberAchievement.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'members.dart';
-
-class MemberScreen extends StatefulWidget {
-
-  final String uid;
-  MemberScreen(this.uid, {Key key}): super(key: key);
-
+User loggedInUser;
+class precord extends StatefulWidget {
   @override
-  _MemberScreenState createState() => _MemberScreenState();
+  _precordState createState() => _precordState();
 }
 
-class _MemberScreenState extends State<MemberScreen> {
+class _precordState extends State<precord> {
+  final _auth=FirebaseAuth.instance;
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,batch;
+  List<String> daily;
+  void getCurrentUser()async{
+    try{
+      final user=_auth.currentUser;
+      if(user!=null){
+        loggedInUser=user;
+      }
+    }catch(e){
+      print(e);
+    }
+  }
 
+  void initState(){
+    super.initState();
+    getCurrentUser();
+  }
   Future<void> userdata() async{
-    DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
+    final uid= loggedInUser.uid;
+    DocumentSnapshot ds= await userCollection.doc(uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
-
+    daily=List.from(ds.get('daily'));
+    print(daily);
   }
 
   @override
@@ -92,7 +107,7 @@ class _MemberScreenState extends State<MemberScreen> {
                     ),
                     alignment: FractionalOffset.centerLeft,
                     width: 400,
-                    height: 10),
+                    height: 30),
                 SizedBox(height: 15),
                 Container(
                   decoration: BoxDecoration(
@@ -101,7 +116,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   ),
                   alignment: FractionalOffset.centerLeft,
                   width: 350,
-                  height: 120,
+                  height: 100,
                   padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Row(
                     children: [
@@ -164,10 +179,9 @@ class _MemberScreenState extends State<MemberScreen> {
                     color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-
                   alignment: FractionalOffset.topLeft,
                   width: 350,
-                  height: 400,
+                  height: 300,
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Column(
                     children: [
@@ -180,30 +194,11 @@ class _MemberScreenState extends State<MemberScreen> {
                           width: 420,
                           height: 45),
                       Container(
-
-                  alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 30),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.topLeft,
-                width: 350,
-                height: 380,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Column(
-                  children: [
-                    Container(
-
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         alignment: FractionalOffset.centerLeft,
-
                         width: 320,
                         height: 200,             //change it back to 55
                         padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
@@ -213,187 +208,17 @@ class _MemberScreenState extends State<MemberScreen> {
                             if (snapshot.connectionState != ConnectionState.done)
                               return Text("Loading");
                             return ListView.builder(
-                              itemCount: achieve.length,
+                              itemCount: daily.length,
                               itemBuilder: (context, index) {
                                 return ListTile(
-                                  title: Text('${achieve[index]}'),
+                                  title: Text('${daily[index]}'),
                                 );
                               },
                             );
                           },
                         ),
-
-
-                        /*FlatButton(
-
-                        width: 420,
-                        height: 35),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,             //change it back to 55
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-
-                      child:FlatButton(
-
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new MemberAchievement(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Achievement',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-                          ),
-                        ),
-
-                      ),*/
-
-
                       ),
                       SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        alignment: FractionalOffset.centerLeft,
-                        width: 320,
-                        height: 200,
-                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                        child:FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => new Attendance(widget.uid)),
-                            );
-                          },
-                          child: Text(
-                            'Attendance',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[850],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        alignment: FractionalOffset.centerLeft,
-                        width: 320,
-                        height: 55,
-                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => new Statistics()),
-                            );
-                          },
-                          child: Text(
-                            'Statistics',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[850],
-                            ),
-
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child:FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Attendance(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Attendance',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Statistics(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Statistics',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        alignment: FractionalOffset.centerLeft,
-                        width: 320,
-                        height: 55,
-                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => new DailyPracticeRecords(widget.uid)),
-                            );
-                          },
-                          child: Text(
-                            'Daily Practice Records',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[850],
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
