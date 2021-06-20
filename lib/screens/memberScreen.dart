@@ -1,4 +1,3 @@
-
 import 'package:athletics_app/screens/Attendance.dart';
 import 'package:athletics_app/screens/DailyPracticeRecords.dart';
 import 'package:athletics_app/screens/Statistics.dart';
@@ -24,12 +23,13 @@ class MemberScreen extends StatefulWidget {
 class _MemberScreenState extends State<MemberScreen> {
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,batch;
-
+  List<String> achieve;
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
-
+    achieve=List.from(ds.get('achieve'));
+    print(achieve);
   }
 
   @override
@@ -164,7 +164,6 @@ class _MemberScreenState extends State<MemberScreen> {
                     color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-
                   alignment: FractionalOffset.topLeft,
                   width: 350,
                   height: 400,
@@ -180,66 +179,24 @@ class _MemberScreenState extends State<MemberScreen> {
                           width: 420,
                           height: 45),
                       Container(
-
-                  alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 30),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.topLeft,
-                width: 350,
-                height: 380,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Column(
-                  children: [
-                    Container(
-
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         alignment: FractionalOffset.centerLeft,
-
                         width: 320,
                         height: 200,             //change it back to 55
                         padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                        child:FutureBuilder(
-                          future: userdata(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState != ConnectionState.done)
-                              return Text("Loading");
-                            return ListView.builder(
-                              itemCount: achieve.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: Text('${achieve[index]}'),
-                                );
-                              },
+                        child:ListView.builder(
+                          itemCount: achieve.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text('${achieve[index]}'),
                             );
                           },
                         ),
 
-
                         /*FlatButton(
-
-                        width: 420,
-                        height: 35),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,             //change it back to 55
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-
-                      child:FlatButton(
-
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -254,7 +211,6 @@ class _MemberScreenState extends State<MemberScreen> {
                             color: Colors.grey[850],
                           ),
                         ),
-
                       ),*/
 
 
@@ -301,7 +257,7 @@ class _MemberScreenState extends State<MemberScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => new Statistics()),
+                                  builder: (context) => new Statistics(widget.uid)),
                             );
                           },
                           child: Text(
@@ -310,60 +266,6 @@ class _MemberScreenState extends State<MemberScreen> {
                               fontSize: 20,
                               color: Colors.grey[850],
                             ),
-
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child:FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Attendance(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Attendance',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Statistics(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Statistics',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-
                           ),
                         ),
                       ),
