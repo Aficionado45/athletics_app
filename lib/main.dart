@@ -1,5 +1,4 @@
 import 'package:athletics_app/screens/Alumni.dart';
-import 'package:athletics_app/screens/AlumniAchievement.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +22,7 @@ import 'screens/Statistics.dart';
 import 'screens/DailyPracticeRecords.dart';
 import 'screens/memberAchievement.dart';
 import 'screens/Attendance.dart';
+import 'screens/precord.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
      return MaterialApp(
-      initialRoute: 'homescreen',
+      initialRoute: 'login',
       routes: {
         //Add all the page navigation references here to navigate across screens.
         'user':(context) => MemberInfo(),
@@ -53,12 +53,14 @@ class _MyAppState extends State<MyApp> {
         'homescreen': (context) => HomeScreen(),
         'memberlist' : (context)=> Members(),
         'alumni':(context)=> Alumni(),
-        'memberScreen':(context)=> MemberScreen("Blah Blah"),
+        'memberScreen':(context)=> MemberScreen("blah blah"),
         'attendance':(context)=>Attendance('Pass UID'),
         'stats':(context)=>Statistics(),
         'daily':(context)=>DailyPracticeRecords('Pass UID'),
         'memberAchievement':(context) => MemberAchievement('Pass UID'),
-        'alumniAchieve':(context)=> AlumniAchieve('pass uid'),
+        'precord':(context) => precord(),
+
+
 
       },
     );

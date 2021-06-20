@@ -1,11 +1,11 @@
 import 'package:athletics_app/screens/achievements.dart';
 import 'package:athletics_app/screens/leaderboard.dart';
+import 'package:athletics_app/screens/precord.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
-
 import 'homescreen.dart';
 import 'members.dart';
 
@@ -208,7 +208,10 @@ Future<void> userdata() async{
                 children: [
                   FlatButton(
                     onPressed: () {
-                      Navigator.pushNamed(context,'daily');
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(builder: (context) => new precord()),
+                      );
                     },
                     child: Text(
                       'Daily Records',
@@ -258,7 +261,7 @@ Future<void> userdata() async{
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               alignment: FractionalOffset.center,
