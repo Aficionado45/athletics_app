@@ -20,11 +20,12 @@ class AlumniAchieve extends StatefulWidget {
 class _AlumniAchieveState extends State<AlumniAchieve> {
   final userCollection =FirebaseFirestore.instance.collection("alumni");
   String name,batch;
-
+  List <String> achieve=[];
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
+    achieve=List.from(ds.get('achieve'));
   }
 
   int _currentindex = 0;
@@ -252,6 +253,27 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   alignment: FractionalOffset.topLeft,
                   width: 350,
                   height: 400,
+
+                  child: FutureBuilder(
+                    future: userdata(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done)
+                        return Text("Loading");
+                      return ListView.builder(
+                        itemCount: achieve.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text('${achieve[index]}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

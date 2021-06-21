@@ -30,7 +30,6 @@ class _MemberAchievementState extends State<MemberAchievement> {
     name=ds.get('name');
     batch=ds.get('batch');
     achieve=List.from(ds.get('achieve'));
-    print(achieve);
   }
 
   int _currentindex = 0;
