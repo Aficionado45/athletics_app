@@ -209,22 +209,15 @@ class _MembersState extends State<Members> {
                                 padding: EdgeInsets.fromLTRB(15, 10, 0, 5),
                                 width: MediaQuery.of(context).size.width / 2.4,
                                 height: MediaQuery.of(context).size.height / 11,
-                                child: Text(
-                                  doc['name'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
+
+
                               ),
                               Container(
                                 alignment: FractionalOffset.centerLeft,
                                 padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
                                 width: MediaQuery.of(context).size.width / 2.5,
                                 height: MediaQuery.of(context).size.height / 17,
-                                child: Text(
-                                  doc['batch'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
+
                               ),
                             ]),
                           ]),

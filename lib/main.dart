@@ -23,6 +23,8 @@ import 'screens/DailyPracticeRecords.dart';
 import 'screens/memberAchievement.dart';
 import 'screens/Attendance.dart';
 import 'screens/precord.dart';
+
+
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -58,6 +60,8 @@ class _MyAppState extends State<MyApp> {
         'stats':(context)=>Statistics('Pass UID'),
         'daily':(context)=>DailyPracticeRecords('Pass UID'),
         'precord':(context) => precord(),
+
+
 
 
       },
