@@ -11,7 +11,7 @@ import 'memberScreen.dart';
 import 'members.dart';
 
 class Alumni extends StatefulWidget {
-  const Alumni({Key key}) : super(key: key);
+
 
   @override
   _AlumniState createState() => _AlumniState();
@@ -173,7 +173,7 @@ class _AlumniState extends State<Alumni> {
                 return ListView(
                   children: snapshot.data.docs.map((doc) {
                     return Container(
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                      padding: EdgeInsets.fromLTRB(30, 10, 30,10),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Color(0xFF143B40),
@@ -208,7 +208,7 @@ class _AlumniState extends State<Alumni> {
                                 alignment: FractionalOffset.centerLeft,
                                 padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
                                 width: MediaQuery.of(context).size.width / 2.5,
-                                height: MediaQuery.of(context).size.height / 18,
+                                height: MediaQuery.of(context).size.height / 16,
                                 child: Text(
                                   doc.data()['batch'],
                                   style: TextStyle(
