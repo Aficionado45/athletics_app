@@ -1,22 +1,23 @@
-import 'package:athletics_app/screens/AthleteOfMonth.dart';
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:athletics_app/screens/AthleteOfYear.dart';
-
+import 'leaderboard.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'members.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'memberScreen.dart';
+
+class AthleteOfYear extends StatefulWidget {
 
 
-
-class Leaderboard extends StatefulWidget {
   @override
-  _LeaderboardState createState() => _LeaderboardState();
+  _AthleteOfYearState createState() => _AthleteOfYearState();
 }
 
-class _LeaderboardState extends State<Leaderboard> {
-  int _currentindex=0;
+class _AthleteOfYearState extends State<AthleteOfYear> {
+  final userCollection =FirebaseFirestore.instance.collection("users");
+  String uid;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class _LeaderboardState extends State<Leaderboard> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            'Leaderboard',
+            'Athlete Of Year',
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
@@ -36,7 +37,7 @@ class _LeaderboardState extends State<Leaderboard> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+                new MaterialPageRoute(builder: (context) => new Leaderboard()),
               );
             },
             child: Icon(
@@ -154,104 +155,9 @@ class _LeaderboardState extends State<Leaderboard> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background.jpeg"),
-              fit: BoxFit.fill,
-            ),
+                image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(height: 80),
-                Container(
-                  height: 78,
-                  width: 185,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF143B40),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
-                      fontSize: 23,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 86,
-                  width: 185,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(34, 22, 34, 15),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new AthleteOfYear()),
-                      );//navigate
-                    },
-                    child: Text("2021",
-                      style:TextStyle(
-                        fontSize: 36,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 100),
-                Container(
-                  height: 78,
-                  width: 185,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF143B40),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
-                      fontSize: 23,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 86,
-                  width: 185,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(25, 17, 23, 17),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new AthleteOfMonth()),
-                      );
-                    },
-                    child: Text("Month",
-                      style:TextStyle(
-                        fontSize: 36,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+
         ),
       ),
     );

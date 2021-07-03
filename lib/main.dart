@@ -1,4 +1,6 @@
 import 'package:athletics_app/screens/Alumni.dart';
+import 'package:athletics_app/screens/AthleteOfMonth.dart';
+import 'package:athletics_app/screens/AthleteOfYear.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +25,7 @@ import 'screens/DailyPracticeRecords.dart';
 import 'screens/memberAchievement.dart';
 import 'screens/Attendance.dart';
 import 'screens/precord.dart';
+
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -58,8 +61,8 @@ class _MyAppState extends State<MyApp> {
         'stats':(context)=>Statistics('Pass UID'),
         'daily':(context)=>DailyPracticeRecords('Pass UID'),
         'precord':(context) => precord(),
-
-
+        'AthleteOfMonth':(context) => AthleteOfMonth(),
+        'AthleteOfYear':(context) => AthleteOfYear(),
       },
     );
     }
