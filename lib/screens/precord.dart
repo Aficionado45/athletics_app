@@ -55,7 +55,7 @@ class _precordState extends State<precord> {
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            "Member",
+            "Daily Record",
             style: TextStyle(
               color: Colors.white,
               fontSize: 30,
