@@ -168,7 +168,9 @@ class _AchievementState extends State<Achievement> {
               children: snapshot.data.docs.map((doc) {
                 return Container(
                   width: 350,
+
                   height: MediaQuery.of(context).size.height / 3,
+
                   margin: EdgeInsets.all(10),
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
