@@ -192,6 +192,7 @@ class _MembersState extends State<Members> {
                           onPressed:
                           () {
                             uid=doc.id;
+                            print(uid);
                             Navigator.push(
                               context,
                               new MaterialPageRoute(builder: (context) => new MemberScreen(uid)),
@@ -220,13 +221,13 @@ class _MembersState extends State<Members> {
                                 alignment: FractionalOffset.centerLeft,
                                 padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
                                 width: MediaQuery.of(context).size.width / 2.5,
+
                                 height: MediaQuery.of(context).size.height / 17,
                                 child: Text(
                                   doc.data()['batch'],
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),
-
                               ),
                             ]),
                           ]),

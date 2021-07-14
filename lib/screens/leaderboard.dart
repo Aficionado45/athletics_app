@@ -1,5 +1,6 @@
 import 'package:athletics_app/screens/AthleteOfMonth.dart';
 import 'package:athletics_app/screens/userinfo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:athletics_app/screens/AthleteOfYear.dart';
@@ -16,7 +17,14 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
+
+  final leaderboardCollection =FirebaseFirestore.instance.collection("leaderboard");
   int _currentindex=0;
+  //List<String> _year = ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034','2035','2036','2037','2038','2039','2040'];
+  var selectedYear;
+
+  List<String> _month = ['January', 'February' , 'March' , 'April' , 'May' , 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December' ];
+  String _selectedMonth;
 
   @override
   Widget build(BuildContext context) {
@@ -188,21 +196,49 @@ class _LeaderboardState extends State<Leaderboard> {
                         Radius.circular(10)
                     ),
                   ),
-                  padding: EdgeInsets.fromLTRB(34, 22, 34, 15),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new AthleteOfYear()),
-                      );//navigate
+                  padding: EdgeInsets.fromLTRB(45, 22, 34, 15),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance.collection("leaderboard").snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot){
+                      if(!snapshot.hasData){
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      else{
+                        List<DropdownMenuItem> leaderboarditems=[];
+                        for(int i=0;i<snapshot.data.docs.length;i++){
+                          DocumentSnapshot snap=snapshot.data.docs[i];
+                          leaderboarditems.add(
+                            DropdownMenuItem(
+                                child: Text(
+                                  snap.id,
+                                ),
+                                value:"${snap.id}",
+                            )
+                          );
+                        }
+                        return DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            hint: Center(
+                              child: Text("Year",
+                                style:TextStyle(
+                                  fontSize: 23,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                              items: leaderboarditems,
+                          onChanged: (yearValue){
+                                setState(() {
+                                  selectedYear=yearValue;
+                                });
+                          },
+                          value: selectedYear,
+                            isExpanded: false,
+                          ),
+                        );
+                      }
                     },
-                    child: Text("2021",
-                      style:TextStyle(
-                        fontSize: 36,
-                        color: Colors.black,
-                      ),
-                    ),
                   ),
                 ),
                 SizedBox(height: 100),
@@ -232,23 +268,35 @@ class _LeaderboardState extends State<Leaderboard> {
                         Radius.circular(10)
                     ),
                   ),
-                  padding: EdgeInsets.fromLTRB(25, 17, 23, 17),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new AthleteOfMonth()),
-                      );
-                    },
-                    child: Text("Month",
-                      style:TextStyle(
-                        fontSize: 36,
-                        color: Colors.black,
+                  padding: EdgeInsets.fromLTRB(45, 17, 0, 15),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      hint: Text("Month",
+                        style:TextStyle(
+                          fontSize: 23,
+                          color: Colors.black,
+                        ),
                       ),
+                      elevation: 10,
+                      value: _selectedMonth,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedMonth = newValue;
+                        });
+                      },
+                      items: _month.map((month) {
+                        return DropdownMenuItem(
+                          child: new Text(month,
+                            style: TextStyle(
+                              fontSize: 23,
+                            ),
+                          ),
+                          value: month,
+                        );
+                      }).toList(),
                     ),
                   ),
-                ),
+                  ),
               ],
             ),
           ),
@@ -257,3 +305,40 @@ class _LeaderboardState extends State<Leaderboard> {
     );
   }
 }
+/*onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new AthleteOfYear()),
+                        );//navigate
+                      },*/
+/*child: DropdownButtonHideUnderline(
+child: DropdownButton(
+hint: Center(
+child: Text("Year",
+style:TextStyle(
+fontSize: 23,
+color: Colors.black,
+),
+),
+),
+value: _selectedYear,
+onChanged: (newValue) {
+setState(() {
+_selectedYear = newValue;
+});
+},
+items: _year.map((year) {
+return DropdownMenuItem(
+child: Center(
+child: new Text(year,
+style: TextStyle(
+fontSize: 23,
+),
+),
+),
+value: year,
+);
+}).toList(),
+),
+),*/
