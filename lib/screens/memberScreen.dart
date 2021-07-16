@@ -23,16 +23,15 @@ class MemberScreen extends StatefulWidget {
 class _MemberScreenState extends State<MemberScreen> {
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,batch;
-  List<String> achieve;
+
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
     name=ds.get('name');
     batch=ds.get('batch');
-    achieve=List.from(ds.get('achieve'));
-    print(achieve);
+
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
@@ -84,223 +83,213 @@ class _MemberScreenState extends State<MemberScreen> {
           ),
           child: SingleChildScrollView(
             child: Column(
-            children: [
-              Container(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 10),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 10),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.centerLeft,
-                width: 350,
-                height: 120,
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
-                      radius: 40,
-                    ),
+                  width: 350,
+                  height: 120,
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/logo.png'),
+                        radius: 40,
+                      ),
 
-                    // Icons.image,
-                    // color: Colors.white,
-                    // size: 30,
-                    SizedBox(width: 15.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                        ),
-                         FutureBuilder(
+                      // Icons.image,
+                      // color: Colors.white,
+                      // size: 30,
+                      SizedBox(width: 15.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+                          ),
+                          FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
                               return Text("$name",
-                                    style: TextStyle(
-                                    color: Colors.white,
-                                fontSize: 21,
-                              ),);
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
                             },
                           ),
-                        SizedBox(height: 15),
-                        FutureBuilder(
-                          future: userdata(),
-                          builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
-                            return Text("$batch",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 21,
-                              ),);
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                          SizedBox(height: 15),
+                          FutureBuilder(
+                            future: userdata(),
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState!=ConnectionState.done)
+                                return Text("Loading");
+                              return Text("$batch",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 21,
+                                ),);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    alignment: FractionalOffset.centerLeft,
+                    width: 400,
+                    height: 30),
+                SizedBox(height: 15),
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
+                    color: Color(0xFF143B40),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  alignment: FractionalOffset.centerLeft,
-                  width: 400,
-                  height: 30),
-              SizedBox(height: 15),
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFF143B40),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                alignment: FractionalOffset.topLeft,
-                width: 350,
-                height: 400,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Column(
-                  children: [
-                    Container(
+                  alignment: FractionalOffset.topLeft,
+                  width: 350,
+                  height: 380,
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: Column(
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          alignment: FractionalOffset.centerLeft,
+                          width: 420,
+                          height: 35),
+                      Container(
                         decoration: BoxDecoration(
-                          color: Colors.transparent,
+                          color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         alignment: FractionalOffset.centerLeft,
-                        width: 420,
-                        height: 45),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 200,             //change it back to 55
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child:ListView.builder(
-                        itemCount: achieve.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('${achieve[index]}'),
-                          );
-                        },
-                      ),
+                        width: 320,
+                        height: 55,             //change it back to 55
+                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
 
-                      /*FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new MemberAchievement(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Achievement',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
-                          ),
-                        ),
-                      ),*/
-
-
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 200,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child:FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Attendance(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Attendance',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
+                        child:FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new MemberAchievement(widget.uid)),
+                            );
+                          },
+                          child: Text(
+                            'Achievement',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[850],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new Statistics(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Statistics',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
+                      SizedBox(height: 30),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        alignment: FractionalOffset.centerLeft,
+                        width: 320,
+                        height: 55,
+                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
+                        child:FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new Attendance(widget.uid)),
+                            );
+                          },
+                          child: Text(
+                            'Attendance',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[850],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      alignment: FractionalOffset.centerLeft,
-                      width: 320,
-                      height: 55,
-                      padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new DailyPracticeRecords(widget.uid)),
-                          );
-                        },
-                        child: Text(
-                          'Daily Practice Records',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[850],
+                      SizedBox(height: 30),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        alignment: FractionalOffset.centerLeft,
+                        width: 320,
+                        height: 55,
+                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new Statistics(widget.uid)),
+                            );
+                          },
+                          child: Text(
+                            'Statistics',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[850],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 30),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        alignment: FractionalOffset.centerLeft,
+                        width: 320,
+                        height: 55,
+                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new DailyPracticeRecords(widget.uid)),
+                            );
+                          },
+                          child: Text(
+                            'Daily Practice Records',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[850],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Theme(
@@ -311,6 +300,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   .textTheme
                   .copyWith(caption: TextStyle(color: Colors.black))),
           child: Container(
+
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: BottomNavigationBar(

@@ -144,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
               image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
                 decoration: BoxDecoration(
@@ -152,16 +153,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 alignment: FractionalOffset.centerLeft,
                 width: 420,
-                height: 59),
-            SizedBox(height: 15),
+                height: 0),
+            //SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: FlatButton(
                 onPressed: () {
@@ -192,15 +193,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            //SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
@@ -230,15 +231,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),),
-            SizedBox(height: 15),
+           // SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
@@ -268,15 +269,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),),
-            SizedBox(height: 15),
+            //SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
@@ -306,15 +307,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),),
-            SizedBox(height: 15),
+            //SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
@@ -344,15 +345,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),),
-            SizedBox(height: 15),
+            //SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.centerLeft,
-              width: 320,
-              height: 60,
+              width: MediaQuery.of(context).size.width / 1.22,
+              height: MediaQuery.of(context).size.height / 13.6,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child:FlatButton(
                 onPressed: (){
