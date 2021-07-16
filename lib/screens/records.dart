@@ -209,17 +209,19 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 128, 12),
+                 // padding: EdgeInsets.fromLTRB(62, 13, 100, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
                   child: FlatButton(
                     onPressed: _launchURL1,
-                    child: Text('Inter IIT',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
+                    child: Center(
+                      child: Text('Inter IIT',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white)
+                      ),
                     ),
                   ),
                 ),
@@ -227,17 +229,19 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 155, 12),
+                  //padding: EdgeInsets.fromLTRB(62, 13, 155, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
                   child: FlatButton(
                     onPressed: _launchURL2,
-                    child: Text('Spirit',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
+                    child: Center(
+                      child: Text('Spirit',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white)
+                      ),
                     ),
                   ),
                 ),
@@ -245,17 +249,19 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 122, 13),
+                 // padding: EdgeInsets.fromLTRB(62, 13, 122, 13),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
                   child: FlatButton(
                     onPressed: _launchURL3,
-                    child: Text('Spardha',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
+                    child: Center(
+                      child: Text('Spardha',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white)
+                      ),
                     ),
                   ),
                 ),
@@ -263,17 +269,19 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 12, 59, 12),
+                  //padding: EdgeInsets.fromLTRB(62, 12, 59, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
                   ),
                   child: FlatButton(
                     onPressed: _launchURL4,
-                    child: Text('Cross Country',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
+                    child: Center(
+                      child: Text('Cross Country',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white)
+                      ),
                     ),
                   ),
                 ),
@@ -281,7 +289,7 @@ class _RecordsState extends State<Records> {
                 Container(
                   height: 59,
                   width: 306,
-                  padding: EdgeInsets.fromLTRB(62, 13, 106, 12),
+                  //padding: EdgeInsets.fromLTRB(62, 13, 106, 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFF143B40),
@@ -289,10 +297,12 @@ class _RecordsState extends State<Records> {
 
                   child: FlatButton(
                     onPressed: _launchURL5,
-                    child: Text('All Others',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white)
+                    child: Center(
+                      child: Text('All Others',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white)
+                      ),
                     ),
                   ),
                 ),
