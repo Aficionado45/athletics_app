@@ -179,11 +179,13 @@ class _LeaderboardState extends State<Leaderboard> {
                         Radius.circular(10)
                     ),
                   ),
-                  padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
-                      fontSize: 23,
-                      color: Colors.white,
+                 // padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
+                  child: Center(
+                    child: Text("Calender",
+                      style:TextStyle(
+                        fontSize: 23,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -251,11 +253,13 @@ class _LeaderboardState extends State<Leaderboard> {
                         Radius.circular(10)
                     ),
                   ),
-                  padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
-                      fontSize: 23,
-                      color: Colors.white,
+                  //padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
+                  child: Center(
+                    child: Text("Calender",
+                      style:TextStyle(
+                        fontSize: 23,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
