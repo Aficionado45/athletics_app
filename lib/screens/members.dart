@@ -217,10 +217,6 @@ class _MembersState extends State<Members> {
                                 alignment: FractionalOffset.centerLeft,
                                 padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
                                 width: MediaQuery.of(context).size.width / 2.5,
-
-                                height: MediaQuery.of(context).size.height / 17,
-
-
                                 height: MediaQuery.of(context).size.height / 18,
                                 child: Text(
                                   doc['batch'],

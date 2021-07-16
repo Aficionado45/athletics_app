@@ -20,7 +20,6 @@ class _MemberInfoState extends State<MemberInfo> {
   final _auth=FirebaseAuth.instance;
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,email,uid;
-  File file;
   void getCurrentUser()async{
     try{
       final user=_auth.currentUser;
@@ -43,7 +42,6 @@ Future<void> userdata() async{
     email=ds.get('email');
 
   }
-  int _currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
