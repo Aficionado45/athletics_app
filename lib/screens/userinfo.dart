@@ -1,5 +1,5 @@
 import 'package:athletics_app/screens/achievements.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:athletics_app/screens/leaderboard.dart';
 import 'package:athletics_app/screens/precord.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +11,23 @@ import 'homescreen.dart';
 import 'members.dart';
 
 User loggedInUser;
+_launchURL1() async {
+  const url = 'https://www.facebook.com/athletics.iitg';
+  if (await canLaunch(url)) {
+    await launch(url,forceSafariVC: false);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+_launchURL2() async {
+  const url = 'https://www.instagram.com/athletics_iitg/';
+  if (await canLaunch(url)) {
+    await launch(url,forceSafariVC: false);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
 class MemberInfo extends StatefulWidget {
   @override
   _MemberInfoState createState() => _MemberInfoState();
@@ -285,7 +302,7 @@ Future<void> userdata() async{
                 children: [
                   // ignore: deprecated_member_use
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: _launchURL1,
                     child: Container(
                         child: Image.asset(
                       'assets/fb.jpg',
@@ -296,7 +313,7 @@ Future<void> userdata() async{
 
                   // ignore: deprecated_member_use
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: _launchURL2,
                     child: Container(
                         child: Image.asset(
                       'assets/insta.png',

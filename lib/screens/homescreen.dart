@@ -2,7 +2,6 @@ import 'package:athletics_app/screens/Alumni.dart';
 import 'package:athletics_app/screens/photogallery.dart';
 import 'package:athletics_app/screens/records.dart';
 import 'package:athletics_app/screens/userinfo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 

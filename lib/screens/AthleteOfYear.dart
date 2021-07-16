@@ -1,52 +1,43 @@
-// import 'dart:html';
-
-import 'package:athletics_app/screens/memberScreen.dart';
 import 'package:athletics_app/screens/userinfo.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'leaderboard.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
-import 'leaderboard.dart';
-import 'memberScreen.dart';
-import 'package:path/path.dart';
-
+import 'members.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'memberScreen.dart';
 
+class AthleteOfYear extends StatefulWidget {
 
-
-class Members extends StatefulWidget {
 
   @override
-  _MembersState createState() => _MembersState();
+  _AthleteOfYearState createState() => _AthleteOfYearState();
 }
 
-class _MembersState extends State<Members> {
-
+class _AthleteOfYearState extends State<AthleteOfYear> {
   final userCollection =FirebaseFirestore.instance.collection("users");
   String uid;
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF143B40),
           title: Text(
-            "Members",
+            'Athlete Of Year',
             style: TextStyle(
-              color: Colors.white,
               fontSize: 30,
+              color: Colors.white,
             ),
           ),
           centerTitle: true,
-          // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+                new MaterialPageRoute(builder: (context) => new Leaderboard()),
               );
             },
             child: Icon(
@@ -166,77 +157,7 @@ class _MembersState extends State<Members> {
             image: DecorationImage(
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
-          child: StreamBuilder(
-              stream:
-              FirebaseFirestore.instance.collection('users').snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
 
-                return ListView(
-
-                  children: snapshot.data.docs.map((doc) {
-                    return Container(
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF143B40),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-
-                        child: FlatButton(
-                          onPressed:
-                          () {
-                            uid=doc.id;
-                            print(uid);
-                            Navigator.push(
-                              context,
-                              new MaterialPageRoute(builder: (context) => new MemberScreen(uid)),
-                            );
-                          },
-                          child: Row(children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage('assets/logo.png'),
-                              radius: 40,
-                            ),
-
-                            Column(children: [
-                              Container(
-                                alignment: FractionalOffset.centerLeft,
-                                padding: EdgeInsets.fromLTRB(15, 10, 0, 5),
-                                width: MediaQuery.of(context).size.width / 2.4,
-                                height: MediaQuery.of(context).size.height / 11,
-                                child: Text(
-                                  doc.data()['name'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-
-                              ),
-                              Container(
-                                alignment: FractionalOffset.centerLeft,
-                                padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
-                                width: MediaQuery.of(context).size.width / 2.5,
-
-                                height: MediaQuery.of(context).size.height / 17,
-                                child: Text(
-                                  doc.data()['batch'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-                              ),
-                            ]),
-                          ]),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                );
-              }),
         ),
       ),
     );
