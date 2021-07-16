@@ -1,4 +1,5 @@
 import 'package:athletics_app/screens/achievements.dart';
+import 'package:athletics_app/screens/reset.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:athletics_app/screens/leaderboard.dart';
 import 'package:athletics_app/screens/precord.dart';
@@ -196,7 +197,12 @@ Future<void> userdata() async{
               padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
               // ignore: deprecated_member_use
               child: FlatButton(
-                onPressed: () {},
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new ResetScreen()));
+                },
                 child: Text(
                   'Change Password',
                   style: TextStyle(

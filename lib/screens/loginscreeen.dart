@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:athletics_app/screens/homescreen.dart';
+import 'package:athletics_app/screens/reset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -151,7 +152,12 @@ class _loginState extends State<login> {
                   color: Colors.transparent,
                   // ignore: deprecated_member_use
                   child:FlatButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                          builder: (context) => new ResetScreen()));
+                    },
                     child:Text(
                       'Forgot Password',
                       style: TextStyle(
