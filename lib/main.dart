@@ -2,6 +2,7 @@ import 'package:athletics_app/screens/Alumni.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:athletics_app/screens/AthleteOfMonth.dart';
 import 'package:athletics_app/screens/AthleteOfYear.dart';
+import 'package:athletics_app/screens/reset.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
      return MaterialApp(
-      initialRoute: 'homescreen',
+      initialRoute: 'welcome',
       routes: {
         //Add all the page navigation references here to navigate across screens.
         'user':(context) => MemberInfo(),
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         'precord':(context) => precord(),
         'AthleteOfMonth':(context) => AthleteOfMonth(),
         'AthleteOfYear':(context) => AthleteOfYear(),
+        'reset': (context)=> ResetScreen() ,
 
 
       },

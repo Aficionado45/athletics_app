@@ -178,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Gallery',
                       style: TextStyle(
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Alumni',
                       style: TextStyle(
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Records',
                       style: TextStyle(
@@ -293,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Members',
                       style: TextStyle(
@@ -331,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Achievements',
                       style: TextStyle(
@@ -369,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       size: 30,
                     ),
-                    SizedBox(width: 40.0),
+                    SizedBox(width: 25.0),
                     Text(
                       'Leaderboard',
                       style: TextStyle(

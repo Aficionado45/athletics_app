@@ -9,21 +9,33 @@ import 'achievements.dart';
 import 'homescreen.dart';
 import 'members.dart';
 
-
-
 class Leaderboard extends StatefulWidget {
   @override
   _LeaderboardState createState() => _LeaderboardState();
 }
 
 class _LeaderboardState extends State<Leaderboard> {
+  final leaderboardCollection =
+      FirebaseFirestore.instance.collection("leaderboard");
+  int _currentindex = 0;
 
-  final leaderboardCollection =FirebaseFirestore.instance.collection("leaderboard");
-  int _currentindex=0;
   //List<String> _year = ['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034','2035','2036','2037','2038','2039','2040'];
   var selectedYear;
 
-  List<String> _month = ['January', 'February' , 'March' , 'April' , 'May' , 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December' ];
+  List<String> _month = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
   String _selectedMonth;
 
   @override
@@ -175,13 +187,12 @@ class _LeaderboardState extends State<Leaderboard> {
                   width: 185,
                   decoration: BoxDecoration(
                     color: Color(0xFF143B40),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
+                  child: Text(
+                    "Calender",
+                    style: TextStyle(
                       fontSize: 23,
                       color: Colors.white,
                     ),
@@ -192,48 +203,46 @@ class _LeaderboardState extends State<Leaderboard> {
                   width: 185,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   padding: EdgeInsets.fromLTRB(45, 22, 34, 15),
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection("leaderboard").snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection("leaderboard")
+                        .snapshots(),
                     builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot){
-                      if(!snapshot.hasData){
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
                         return Center(child: CircularProgressIndicator());
-                      }
-                      else{
-                        List<DropdownMenuItem> leaderboarditems=[];
-                        for(int i=0;i<snapshot.data.docs.length;i++){
-                          DocumentSnapshot snap=snapshot.data.docs[i];
-                          leaderboarditems.add(
-                            DropdownMenuItem(
-                                child: Text(
-                                  snap.id,
-                                ),
-                                value:"${snap.id}",
-                            )
-                          );
+                      } else {
+                        List<DropdownMenuItem> leaderboarditems = [];
+                        for (int i = 0; i < snapshot.data.docs.length; i++) {
+                          DocumentSnapshot snap = snapshot.data.docs[i];
+                          leaderboarditems.add(DropdownMenuItem(
+                            child: Text(
+                              snap.id,
+                            ),
+                            value: "${snap.id}",
+                          ));
                         }
                         return DropdownButtonHideUnderline(
                           child: DropdownButton(
                             hint: Center(
-                              child: Text("Year",
-                                style:TextStyle(
+                              child: Text(
+                                "Year",
+                                style: TextStyle(
                                   fontSize: 23,
                                   color: Colors.black,
                                 ),
                               ),
                             ),
-                              items: leaderboarditems,
-                          onChanged: (yearValue){
-                                setState(() {
-                                  selectedYear=yearValue;
-                                });
-                          },
-                          value: selectedYear,
+                            items: leaderboarditems,
+                            onChanged: (yearValue) {
+                              setState(() {
+                                selectedYear = yearValue;
+                              });
+                            },
+                            value: selectedYear,
                             isExpanded: false,
                           ),
                         );
@@ -247,13 +256,12 @@ class _LeaderboardState extends State<Leaderboard> {
                   width: 185,
                   decoration: BoxDecoration(
                     color: Color(0xFF143B40),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   padding: EdgeInsets.fromLTRB(47, 26, 47, 15),
-                  child: Text("Calender",
-                    style:TextStyle(
+                  child: Text(
+                    "Calender",
+                    style: TextStyle(
                       fontSize: 23,
                       color: Colors.white,
                     ),
@@ -264,15 +272,14 @@ class _LeaderboardState extends State<Leaderboard> {
                   width: 185,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   padding: EdgeInsets.fromLTRB(45, 17, 0, 15),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
-                      hint: Text("Month",
-                        style:TextStyle(
+                      hint: Text(
+                        "Month",
+                        style: TextStyle(
                           fontSize: 23,
                           color: Colors.black,
                         ),
@@ -286,7 +293,8 @@ class _LeaderboardState extends State<Leaderboard> {
                       },
                       items: _month.map((month) {
                         return DropdownMenuItem(
-                          child: new Text(month,
+                          child: new Text(
+                            month,
                             style: TextStyle(
                               fontSize: 23,
                             ),
@@ -296,7 +304,7 @@ class _LeaderboardState extends State<Leaderboard> {
                       }).toList(),
                     ),
                   ),
-                  ),
+                ),
               ],
             ),
           ),
