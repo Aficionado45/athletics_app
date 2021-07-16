@@ -1,12 +1,6 @@
-import 'package:athletics_app/screens/loginscreeen.dart';
-import 'package:athletics_app/screens/userinfo.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'achievements.dart';
-import 'homescreen.dart';
-import 'leaderboard.dart';
-import 'members.dart';
 
 class ResetScreen extends StatefulWidget {
   @override
@@ -33,7 +27,7 @@ class _ResetScreenState extends State<ResetScreen> {
                     height: 250,
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(30, 0, 30,0),
+                    padding: EdgeInsets.fromLTRB(25, 0, 25,0),
                     height: 70,
                     width: MediaQuery.of(context).size.height / 1.8,
                     child: TextField(
