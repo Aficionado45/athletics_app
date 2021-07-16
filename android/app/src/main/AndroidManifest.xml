@@ -2,7 +2,7 @@
     package="com.example.athletics_app">
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
    <application
-        android:label="athletics_app"
+        android:label="Athletics Club"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
