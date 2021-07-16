@@ -275,6 +275,7 @@ class _LeaderboardState extends State<Leaderboard> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
                       hint: Text("Month",
+                        textAlign: TextAlign.center,
                         style:TextStyle(
                           fontSize: 23,
                           color: Colors.black,
