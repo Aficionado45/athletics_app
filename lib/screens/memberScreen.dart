@@ -10,6 +10,9 @@ import 'leaderboard.dart';
 import 'memberAchievement.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'members.dart';
+import 'dart:developer';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class MemberScreen extends StatefulWidget {
 
@@ -22,13 +25,15 @@ class MemberScreen extends StatefulWidget {
 
 class _MemberScreenState extends State<MemberScreen> {
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch;
+   String name,batch,image_url;
 
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
-
+    setState(() {
+      image_url = ds.get('image_url');
+      name=ds.get('name');
+      batch=ds.get('batch');
+    });
   }
 
   @override
@@ -49,9 +54,8 @@ class _MemberScreenState extends State<MemberScreen> {
           // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new Members()),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -105,8 +109,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/logo.png'),
-                        radius: 40,
+                        backgroundImage: NetworkImage("$image_url"),                        radius: 40,
                       ),
 
                       // Icons.image,
@@ -122,8 +125,8 @@ class _MemberScreenState extends State<MemberScreen> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$name",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -135,8 +138,8 @@ class _MemberScreenState extends State<MemberScreen> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$batch",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -300,7 +303,6 @@ class _MemberScreenState extends State<MemberScreen> {
                   .textTheme
                   .copyWith(caption: TextStyle(color: Colors.black))),
           child: Container(
-
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: BottomNavigationBar(
@@ -313,7 +315,7 @@ class _MemberScreenState extends State<MemberScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -332,7 +334,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -348,7 +350,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -365,7 +367,7 @@ class _MemberScreenState extends State<MemberScreen> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),

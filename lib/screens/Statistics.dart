@@ -34,9 +34,8 @@ class _StatisticsState extends State<Statistics> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen('Pass UID')),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -81,7 +80,7 @@ class _StatisticsState extends State<Statistics> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -100,7 +99,7 @@ class _StatisticsState extends State<Statistics> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -116,7 +115,7 @@ class _StatisticsState extends State<Statistics> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -133,7 +132,7 @@ class _StatisticsState extends State<Statistics> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),

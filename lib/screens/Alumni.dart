@@ -37,9 +37,8 @@ class _AlumniState extends State<Alumni> {
           // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -84,7 +83,7 @@ class _AlumniState extends State<Alumni> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -103,7 +102,7 @@ class _AlumniState extends State<Alumni> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -119,7 +118,7 @@ class _AlumniState extends State<Alumni> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -136,7 +135,7 @@ class _AlumniState extends State<Alumni> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -189,7 +188,7 @@ class _AlumniState extends State<Alumni> {
                           },
                           child: Row(children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage('assets/logo.png'),
+                              backgroundImage: NetworkImage(doc.data()['image_url']),
                               radius: 40,
                             ),
                             Column(children: [

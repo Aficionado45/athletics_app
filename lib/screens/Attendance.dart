@@ -18,12 +18,16 @@ class Attendance extends StatefulWidget {
 
 class _AttendanceState extends State<Attendance> {
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch;
+  String name,batch,image_url;
 
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
+    setState(() {
+      name=ds.get('name');
+      batch=ds.get('batch');
+      image_url=ds.get('image_url');
+    });
+
   }
 
   int _currentindex = 0;
@@ -44,9 +48,8 @@ class _AttendanceState extends State<Attendance> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen(widget.uid)),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -91,7 +94,7 @@ class _AttendanceState extends State<Attendance> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -110,7 +113,7 @@ class _AttendanceState extends State<Attendance> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -126,7 +129,7 @@ class _AttendanceState extends State<Attendance> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -143,7 +146,7 @@ class _AttendanceState extends State<Attendance> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -189,7 +192,7 @@ class _AttendanceState extends State<Attendance> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
+                      backgroundImage: NetworkImage("$image_url"),
                       radius: 40,
                     ),
 
@@ -206,8 +209,8 @@ class _AttendanceState extends State<Attendance> {
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
+                            // if(snapshot.connectionState!=ConnectionState.done)
+                            //   return Text("Loading");
                             return Text("$name",
                               style: TextStyle(
                                 color: Colors.white,
@@ -219,8 +222,8 @@ class _AttendanceState extends State<Attendance> {
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
+                            // if(snapshot.connectionState!=ConnectionState.done)
+                            //   return Text("Loading");
                             return Text("$batch",
                               style: TextStyle(
                                 color: Colors.white,

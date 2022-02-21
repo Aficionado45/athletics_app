@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new MemberInfo()),
+                  new MaterialPageRoute(builder: (context) => new MemberInfo())
               );
             },
             icon: Icon(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new HomeScreen()),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Leaderboard()),
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Achievement()),
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Members()),

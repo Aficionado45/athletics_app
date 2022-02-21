@@ -44,10 +44,7 @@ class _MembersState extends State<Members> {
           // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new HomeScreen()),
-              );
+              Navigator.pop(context);
             },
             child: Icon(
               Icons.arrow_back_sharp,
@@ -91,7 +88,7 @@ class _MembersState extends State<Members> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -110,7 +107,7 @@ class _MembersState extends State<Members> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -126,7 +123,7 @@ class _MembersState extends State<Members> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -143,7 +140,7 @@ class _MembersState extends State<Members> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -200,10 +197,9 @@ class _MembersState extends State<Members> {
                           },
                           child: Row(children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage('assets/logo.png'),
+                              backgroundImage: NetworkImage(doc.data()['image_url']),
                               radius: 40,
                             ),
-
                             Column(children: [
                               Container(
                                 alignment: FractionalOffset.centerLeft,
@@ -215,19 +211,17 @@ class _MembersState extends State<Members> {
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),
-
                               ),
                               Container(
-                                alignment: FractionalOffset.centerLeft,
-                                padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
-                                width: MediaQuery.of(context).size.width / 2.5,
-
-                                height: MediaQuery.of(context).size.height / 17,
-                                child: Text(
-                                  doc.data()['batch'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
+                                  alignment: FractionalOffset.centerLeft,
+                                  padding: EdgeInsets.fromLTRB(15, 1, 15, 25),
+                                  width: MediaQuery.of(context).size.width / 2.5,
+                                  height: MediaQuery.of(context).size.height / 16,
+                                  child: Text(
+                                    doc.data()['batch'],
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
+                                  ),
                               ),
                             ]),
                           ]),

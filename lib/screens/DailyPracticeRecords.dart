@@ -18,12 +18,19 @@ class DailyPracticeRecords extends StatefulWidget {
 
 class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch;
+  String name,batch,image_url;
+  List <String> daily=[];
+
 
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
+    setState(() {
+      name=ds.get('name');
+      batch=ds.get('batch');
+      image_url=ds.get('image_url');
+      daily=List.from(ds.get('daily'));
+    });
+
   }
 
   int _currentindex = 0;
@@ -44,9 +51,8 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen(widget.uid)),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -91,7 +97,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -110,7 +116,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -126,7 +132,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -143,7 +149,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -190,7 +196,7 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/logo.png'),
+                      backgroundImage: NetworkImage("$image_url"),
                       radius: 40,
                     ),
 
@@ -207,8 +213,8 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
+                            // if(snapshot.connectionState!=ConnectionState.done)
+                            //   return Text("Loading");
                             return Text("$name",
                               style: TextStyle(
                                 color: Colors.white,
@@ -220,8 +226,8 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                         FutureBuilder(
                           future: userdata(),
                           builder: (context,snapshot){
-                            if(snapshot.connectionState!=ConnectionState.done)
-                              return Text("Loading");
+                            // if(snapshot.connectionState!=ConnectionState.done)
+                            //   return Text("Loading");
                             return Text("$batch",
                               style: TextStyle(
                                 color: Colors.white,
@@ -241,7 +247,8 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                   ),
                   alignment: FractionalOffset.centerLeft,
                   width: 400,
-                  height: 30),
+                  height: 30
+              ),
               SizedBox(height: 15),
               Container(
                 decoration: BoxDecoration(
@@ -250,7 +257,28 @@ class _DailyPracticeRecordsState extends State<DailyPracticeRecords> {
                 ),
                 alignment: FractionalOffset.topLeft,
                 width: 350,
-                height: 400,
+                height: 350,
+                padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
+                child: FutureBuilder(
+                  future: userdata(),
+                  builder: (context, snapshot) {
+                    // if (snapshot.connectionState != ConnectionState.done)
+                    //   return Text("Loading");
+                    return ListView.builder(
+                      itemCount: daily.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text('${daily[index]}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 21,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),

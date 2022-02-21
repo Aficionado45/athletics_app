@@ -1,4 +1,6 @@
 import 'package:athletics_app/screens/achievements.dart';
+import 'package:athletics_app/screens/loginscreeen.dart';
+import 'package:athletics_app/screens/profilePic.dart';
 import 'package:athletics_app/screens/reset.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:athletics_app/screens/leaderboard.dart';
@@ -37,7 +39,7 @@ class MemberInfo extends StatefulWidget {
 class _MemberInfoState extends State<MemberInfo> {
   final _auth=FirebaseAuth.instance;
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,email,uid;
+  String name,email,uid,image_url;
   void getCurrentUser()async{
     try{
       final user=_auth.currentUser;
@@ -56,8 +58,11 @@ class _MemberInfoState extends State<MemberInfo> {
 Future<void> userdata() async{
     final uid= loggedInUser.uid;
     DocumentSnapshot ds= await userCollection.doc(uid).get();
-    name=ds.get('name');
-    email=ds.get('email');
+    setState(() {
+      name=ds.get('name');
+      email=ds.get('email');
+      image_url=ds.get('image_url');
+    });
 
   }
 
@@ -76,9 +81,8 @@ Future<void> userdata() async{
         centerTitle: true,
         leading: FlatButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              new MaterialPageRoute(builder: (context) => new HomeScreen()),
+            Navigator.pop(
+              context
             );
           },
           child: Icon(
@@ -113,12 +117,18 @@ Future<void> userdata() async{
             SizedBox(
               height: 10,
             ),
-            Container(
-              child: Icon(
-                Icons.account_circle_rounded,
-                size: 68,
-              ),
+          GestureDetector(
+            onTap: (){
+              Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => new profilePic(uid)),
+              );
+            },
+            child: CircleAvatar(
+
+              backgroundImage: NetworkImage("$image_url"),
+              radius: 60,
             ),
+          ),
+            SizedBox(height: 10,),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF143B40),
@@ -135,8 +145,8 @@ Future<void> userdata() async{
                   FutureBuilder(
                     future: userdata(),
                     builder: (context,snapshot){
-                      if(snapshot.connectionState!=ConnectionState.done)
-                        return Text("Loading");
+                      // if(snapshot.connectionState!=ConnectionState.done)
+                      //   return Text("Loading");
                       return Text("$name",
                       style: TextStyle(
                         color: Colors.white,
@@ -168,8 +178,8 @@ Future<void> userdata() async{
                   FutureBuilder(
                     future: userdata(),
                     builder: (context,snapshot){
-                      if(snapshot.connectionState!=ConnectionState.done)
-                        return Text("Loading");
+                      // if(snapshot.connectionState!=ConnectionState.done)
+                      //   return Text("Loading");
                       return Text("$email",
                         style: TextStyle(
                           color: Colors.white,
@@ -246,8 +256,9 @@ Future<void> userdata() async{
                   Padding(padding: EdgeInsets.fromLTRB(70, 0, 0, 0)),
                   FlatButton(
                     onPressed: () {
-
-
+                      Navigator.pushReplacement(context, new MaterialPageRoute(
+                          builder: (context) => new precord()),
+                      );
                     },
                     child: Icon(
                       Icons.edit,
@@ -270,11 +281,15 @@ Future<void> userdata() async{
               width: 350,
               height: 58,
 
-              // ignore: deprecated_member_use
               child: FlatButton(
                 onPressed: () {
                   _auth.signOut();
-                  Navigator.pushNamed(context,'login');
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => login()
+                      ),
+                  );
                 },
                 child: Text(
                   'Log out',
@@ -353,7 +368,7 @@ Future<void> userdata() async{
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new HomeScreen()),
@@ -372,7 +387,7 @@ Future<void> userdata() async{
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Leaderboard()),
@@ -388,7 +403,7 @@ Future<void> userdata() async{
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Achievement()),
@@ -405,7 +420,7 @@ Future<void> userdata() async{
                 BottomNavigationBarItem(
                   icon: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new Members()),

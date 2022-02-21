@@ -1,10 +1,14 @@
 
+import 'dart:collection';
+import 'dart:ffi';
+
 import 'package:athletics_app/screens/Attendance.dart';
 import 'package:athletics_app/screens/DailyPracticeRecords.dart';
 import 'package:athletics_app/screens/Statistics.dart';
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'achievements.dart';
 import 'homescreen.dart';
 import 'leaderboard.dart';
@@ -20,8 +24,10 @@ class precord extends StatefulWidget {
 
 class _precordState extends State<precord> {
   final _auth=FirebaseAuth.instance;
+  var _controller = TextEditingController();
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch;
+  String name,batch,uid,image_url;
+  String title;
   List<String> daily;
   void getCurrentUser()async{
     try{
@@ -41,10 +47,11 @@ class _precordState extends State<precord> {
   Future<void> userdata() async{
     final uid= loggedInUser.uid;
     DocumentSnapshot ds= await userCollection.doc(uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
-    daily=List.from(ds.get('daily'));
-    print(daily);
+    setState(() {
+      name=ds.get('name');
+      batch=ds.get('batch');
+      image_url=ds.get('image_url');
+    });
   }
 
   @override
@@ -65,9 +72,8 @@ class _precordState extends State<precord> {
           // ignore: deprecated_member_use
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new Members()),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -116,12 +122,12 @@ class _precordState extends State<precord> {
                   ),
                   alignment: FractionalOffset.centerLeft,
                   width: 350,
-                  height: 100,
+                  height: 120,
                   padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/logo.png'),
+                        backgroundImage: NetworkImage("$image_url"),
                         radius: 40,
                       ),
 
@@ -138,8 +144,8 @@ class _precordState extends State<precord> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$name",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -151,8 +157,8 @@ class _precordState extends State<precord> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$batch",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -181,7 +187,7 @@ class _precordState extends State<precord> {
                   ),
                   alignment: FractionalOffset.topLeft,
                   width: 350,
-                  height: 300,
+                  height: 340,
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Column(
                     children: [
@@ -200,25 +206,41 @@ class _precordState extends State<precord> {
                         ),
                         alignment: FractionalOffset.centerLeft,
                         width: 320,
-                        height: 200,             //change it back to 55
-                        padding: EdgeInsets.fromLTRB(25, 12, 0, 20),
-                        child:FutureBuilder(
-                          future: userdata(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState != ConnectionState.done)
-                              return Text("Loading");
-                            return ListView.builder(
-                              itemCount: daily.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: Text('${daily[index]}'),
-                                );
-                              },
-                            );
+                        height: 210,             //change it back to 55
+                        padding: EdgeInsets.all(10),
+                        child:TextField(
+                          controller: _controller,
+                          onChanged: (value){
+                            setState(() {
+                              title=value;
+                            });
                           },
+                          autocorrect: true,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            hintText: 'Daily Events',
+
+                          ),
+
                         ),
                       ),
                       SizedBox(height: 30),
+                      ElevatedButton(onPressed:  ()  async{
+                        _controller.clear();
+                        String UID= FirebaseAuth.instance.currentUser.uid;
+                        DocumentSnapshot data=await Firestore.instance.collection("users").document(UID).get();
+                        List<dynamic> list=data['daily'];
+                        print(list);
+                        var now = new DateTime.now();
+                        var formatter = new DateFormat('dd-MM-yyyy');
+                        String formattedDate = formatter.format(now);
+                        String record= formattedDate.toString() +" "+title;
+                        list.add(record);
+                        Map<String,dynamic> d=HashMap();
+                        d['daily']=list;
+                        await FirebaseFirestore.instance.collection('users').document(FirebaseAuth.instance.currentUser.uid).update(d);
+                      }, child: Text('Add'))
+
                     ],
                   ),
                 ),
@@ -226,6 +248,7 @@ class _precordState extends State<precord> {
             ),
           ),
         ),
+
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               canvasColor: Color.fromRGBO(255, 255, 255, 255),
@@ -246,7 +269,7 @@ class _precordState extends State<precord> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -265,7 +288,7 @@ class _precordState extends State<precord> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -281,7 +304,7 @@ class _precordState extends State<precord> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -298,7 +321,7 @@ class _precordState extends State<precord> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -318,5 +341,7 @@ class _precordState extends State<precord> {
         ),
       ),
     );
+
   }
+
 }

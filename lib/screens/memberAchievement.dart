@@ -23,13 +23,18 @@ class MemberAchievement extends StatefulWidget {
 
 class _MemberAchievementState extends State<MemberAchievement> {
   final userCollection =FirebaseFirestore.instance.collection("users");
-  String name,batch;
+  String name,batch,image_url;
   List <String> achieve=[];
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
-    achieve=List.from(ds.get('achieve'));
+    setState(() {
+      name=ds.get('name');
+      batch=ds.get('batch');
+      achieve=List.from(ds.get('achieve'));
+      image_url=ds.get('image_url');
+    });
+
+
   }
 
   int _currentindex = 0;
@@ -52,10 +57,8 @@ class _MemberAchievementState extends State<MemberAchievement> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new MemberScreen(widget.uid)
-              ),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -100,7 +103,7 @@ class _MemberAchievementState extends State<MemberAchievement> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -119,7 +122,7 @@ class _MemberAchievementState extends State<MemberAchievement> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -135,7 +138,7 @@ class _MemberAchievementState extends State<MemberAchievement> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -152,7 +155,7 @@ class _MemberAchievementState extends State<MemberAchievement> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -199,7 +202,7 @@ class _MemberAchievementState extends State<MemberAchievement> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/logo.png'),
+                        backgroundImage: NetworkImage("$image_url"),
                         radius: 40,
                       ),
 
@@ -216,8 +219,8 @@ class _MemberAchievementState extends State<MemberAchievement> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$name",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -229,8 +232,8 @@ class _MemberAchievementState extends State<MemberAchievement> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$batch",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -265,8 +268,8 @@ class _MemberAchievementState extends State<MemberAchievement> {
                   child: FutureBuilder(
                     future: userdata(),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done)
-                        return Text("Loading");
+                      // if (snapshot.connectionState != ConnectionState.done)
+                      //   return Text("Loading");
                       return ListView.builder(
                         itemCount: achieve.length,
                         itemBuilder: (context, index) {

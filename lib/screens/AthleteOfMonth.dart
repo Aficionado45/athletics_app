@@ -34,9 +34,8 @@ class _AthleteOfMonthState extends State<AthleteOfMonth> {
             centerTitle: true,
             leading: FlatButton(
             onPressed: () {
-            Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new Leaderboard()),
+            Navigator.pop(
+            context
             );
             },
               child: Icon(
@@ -62,95 +61,95 @@ class _AthleteOfMonthState extends State<AthleteOfMonth> {
               ],
               ),
           bottomNavigationBar: Theme(
-              data: Theme.of(context).copyWith(
-              canvasColor: Color.fromRGBO(255, 255, 255, 255),
-              primaryColor: Colors.red,
-              textTheme: Theme.of(context)
-              .textTheme
-              .copyWith(caption: TextStyle(color: Colors.black))),
+            data: Theme.of(context).copyWith(
+                canvasColor: Color.fromRGBO(255, 255, 255, 255),
+                primaryColor: Colors.red,
+                textTheme: Theme.of(context)
+                    .textTheme
+                    .copyWith(caption: TextStyle(color: Colors.black))),
             child: Container(
               child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                currentIndex: 0,
-                items: [
-                BottomNavigationBarItem(
-                    icon: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: IconButton(
-                    onPressed: () {
-                    Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                    builder: (context) => new HomeScreen()),
-                    );
-                    },
-                      icon: Icon(Icons.home),
-                      color: Colors.white,
-                      iconSize: 30,
-                      ),
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  currentIndex: 0,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new HomeScreen()),
+                            );
+                          },
+                          icon: Icon(Icons.home),
+                          color: Colors.white,
+                          iconSize: 30,
+                        ),
                       ),
 
-                  backgroundColor: Color(0xFF143B40),
-                  // ignore: deprecated_member_use
-                  title: Text(''),
-                  ),
-                  BottomNavigationBarItem(
-                  icon: IconButton(
-                  onPressed: () {
-                  Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                  builder: (context) => new Leaderboard()),
-                  );
-                  },
-                    icon: Icon(Icons.leaderboard),
-                    color: Colors.white,
-                    iconSize: 30,
-                    ),
-                    // ignore: deprecated_member_use
-                    title: Text(''),
-                    ),
-                  BottomNavigationBarItem(
-                  icon: IconButton(
-                  onPressed: () {
-                  Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                  builder: (context) => new Achievement()),
-                  );
-                  },
-                    icon: Icon(Icons.emoji_events_rounded),
-                    color: Colors.white,
-                    iconSize: 30,
-                    ),
-
-                    // ignore: deprecated_member_use
-                    title: Text(''),
+                      backgroundColor: Color(0xFF143B40),
+                      // ignore: deprecated_member_use
+                      title: Text(''),
                     ),
                     BottomNavigationBarItem(
-                    icon: IconButton(
-                    onPressed: () {
-                    Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                    builder: (context) => new Members()),
-                    );
-                    },
-                    icon: Icon(Icons.group_rounded),
-                    color: Colors.white,
-                    iconSize: 30,
+                      icon: IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new Leaderboard()),
+                          );
+                        },
+                        icon: Icon(Icons.leaderboard),
+                        color: Colors.white,
+                        iconSize: 30,
+                      ),
+                      // ignore: deprecated_member_use
+                      title: Text(''),
                     ),
-                    // ignore: deprecated_member_use
-                    title: Text(''),
+                    BottomNavigationBarItem(
+                      icon: IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new Achievement()),
+                          );
+                        },
+                        icon: Icon(Icons.emoji_events_rounded),
+                        color: Colors.white,
+                        iconSize: 30,
+                      ),
+
+                      // ignore: deprecated_member_use
+                      title: Text(''),
                     ),
-                    ],
-                   ),
-                  ),
-                 ),
+                    BottomNavigationBarItem(
+                      icon: IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new Members()),
+                          );
+                        },
+                        icon: Icon(Icons.group_rounded),
+                        color: Colors.white,
+                        iconSize: 30,
+                      ),
+                      // ignore: deprecated_member_use
+                      title: Text(''),
+                    ),
+                  ],
                 ),
+              ),
+            ),
+          ),
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(

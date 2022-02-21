@@ -1,4 +1,6 @@
+import 'package:athletics_app/screens/AddPhotos.dart';
 import 'package:athletics_app/screens/Alumni.dart';
+import 'package:athletics_app/screens/ImagePage.dart';
 import 'package:athletics_app/screens/members.dart';
 import 'package:athletics_app/screens/AthleteOfMonth.dart';
 import 'package:athletics_app/screens/AthleteOfYear.dart';
@@ -12,7 +14,6 @@ import 'package:flutter/gestures.dart';
 import 'screens/records.dart';
 import 'screens/welcome.dart';
 import 'screens/loginscreeen.dart';
-import 'screens/photogallery.dart';
 import 'screens/userinfo.dart';
 import 'screens/leaderboard.dart';
 import 'screens/achievements.dart';
@@ -25,6 +26,7 @@ import 'screens/DailyPracticeRecords.dart';
 import 'screens/memberAchievement.dart';
 import 'screens/Attendance.dart';
 import 'screens/precord.dart';
+import 'screens/photogallery.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -42,6 +44,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
      return MaterialApp(
+       debugShowCheckedModeBanner: false,
       initialRoute: 'welcome',
       routes: {
         //Add all the page navigation references here to navigate across screens.
@@ -62,7 +65,8 @@ class _MyAppState extends State<MyApp> {
         'precord':(context) => precord(),
         'AthleteOfMonth':(context) => AthleteOfMonth(),
         'AthleteOfYear':(context) => AthleteOfYear(),
-
+        'ImagePage':(context)=>ImagePage(),
+        'addPhotos':(context)=>AddPhotos(),
 
       },
     );

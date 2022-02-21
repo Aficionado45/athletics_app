@@ -1,3 +1,5 @@
+import 'package:athletics_app/screens/homescreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,15 +12,27 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  FirebaseAuth firebaseAuth;
   @override
   void initState() {
   super.initState();
-  new Future.delayed(const Duration(seconds: 5), () {
-    Navigator.push(
-      context,
-      new MaterialPageRoute(
-          builder: (context) => new login()),
-    );
+  new Future.delayed(const Duration(seconds: 2), () {
+    firebaseAuth=FirebaseAuth.instance;
+    if(firebaseAuth.currentUser!=null){
+      Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new HomeScreen()),
+      );
+
+    }
+    else{
+      Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new login()),
+      );
+    }
   },);
   }
 

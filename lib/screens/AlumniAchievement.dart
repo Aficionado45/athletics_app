@@ -19,13 +19,17 @@ class AlumniAchieve extends StatefulWidget {
 
 class _AlumniAchieveState extends State<AlumniAchieve> {
   final userCollection =FirebaseFirestore.instance.collection("alumni");
-  String name,batch;
+  String name,batch,image_url;
   List <String> achieve=[];
   Future<void> userdata() async{
     DocumentSnapshot ds= await userCollection.doc(widget.uid).get();
-    name=ds.get('name');
-    batch=ds.get('batch');
-    achieve=List.from(ds.get('achieve'));
+    setState(() {
+      name=ds.get('name');
+      batch=ds.get('batch');
+      achieve=List.from(ds.get('achieve'));
+      image_url=ds.get('image_url');
+    });
+
   }
 
   int _currentindex = 0;
@@ -46,9 +50,8 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new Alumni()),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -93,7 +96,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -112,7 +115,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -128,7 +131,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -145,7 +148,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
@@ -192,7 +195,7 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/logo.png'),
+                        backgroundImage: NetworkImage("$image_url"),
                         radius: 40,
                       ),
 
@@ -209,8 +212,8 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$name",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -222,8 +225,8 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                           FutureBuilder(
                             future: userdata(),
                             builder: (context,snapshot){
-                              if(snapshot.connectionState!=ConnectionState.done)
-                                return Text("Loading");
+                              // if(snapshot.connectionState!=ConnectionState.done)
+                              //   return Text("Loading");
                               return Text("$batch",
                                 style: TextStyle(
                                   color: Colors.white,
@@ -257,9 +260,10 @@ class _AlumniAchieveState extends State<AlumniAchieve> {
                   child: FutureBuilder(
                     future: userdata(),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done)
-                        return Text("Loading");
+                      // if (snapshot.connectionState != ConnectionState.done)
+                      //   return Text("Loading");
                       return ListView.builder(
+                        padding:EdgeInsets.fromLTRB(10, 10, 0, 0),
                         itemCount: achieve.length,
                         itemBuilder: (context, index) {
                           return ListTile(

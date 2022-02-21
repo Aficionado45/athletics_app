@@ -1,21 +1,25 @@
+import 'package:athletics_app/screens/AddPhotos.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:async';
 import 'dart:ffi';
 import 'dart:typed_data';
-
 import 'package:athletics_app/screens/userinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'ImagePage.dart';
 import 'achievements.dart';
-import 'dataHolder.dart';
 // import 'package:transparent_image/transparent_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'homescreen.dart';
 import 'leaderboard.dart';
 import 'members.dart';
-
-
-CollectionReference imgRef;
 
 class gallery extends StatefulWidget {
   @override
@@ -23,227 +27,238 @@ class gallery extends StatefulWidget {
 }
 
 class _galleryState extends State<gallery> {
-  int _currentindex = 0;
+    Future<List<FirebaseFile>> futureFiles;
+    Uint8List imagefile;
 
-
-  Widget makeItemGrid(){
-    return GridView.builder(
-      padding: EdgeInsets.all(4),
-      itemCount: 44,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 4,crossAxisSpacing: 4),
-      itemBuilder: (context,index){
-        return ImageGridItem(index+1);
-      },
-    );
-  }
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[850],
-      appBar: AppBar(
-        backgroundColor: Color(0xFF143B40),
-        title: Text(
-          'Gallery',
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-          ),
+  void initState() {
+    super.initState();
+
+    futureFiles = FirebaseApi.listAll('TeamPhotos/');
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: Colors.grey[850],
+    appBar: AppBar(
+      backgroundColor: Color(0xFF143B40),
+      title: Text(
+        'Gallery',
+        style: TextStyle(
+          fontSize: 30,
+          color: Colors.white,
         ),
-        centerTitle: true,
-        leading: FlatButton(
+      ),
+      centerTitle: true,
+      leading: FlatButton(
+        onPressed: () {
+          Navigator.pop(
+            context);
+        },
+        child: Icon(
+          Icons.arrow_back_sharp,
+          size: 30,
+          color: Colors.white,
+        ),
+      ),
+      actions: [
+        IconButton(
           onPressed: () {
             Navigator.push(
               context,
-              new MaterialPageRoute(builder: (context) => new HomeScreen()),
+              new MaterialPageRoute(builder: (context) => new MemberInfo()),
             );
           },
-          child: Icon(
-            Icons.arrow_back_sharp,
-            size: 30,
+          icon: Icon(
+            Icons.account_circle,
             color: Colors.white,
+            size: 30,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new MemberInfo()),
-              );
-            },
-            icon: Icon(
-              Icons.account_circle,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-            canvasColor: Color.fromRGBO(255, 255, 255, 255),
-            primaryColor: Colors.red,
-            textTheme: Theme.of(context)
-                .textTheme
-                .copyWith(caption: TextStyle(color: Colors.black))),
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              currentIndex: 0,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => new HomeScreen()),
-                        );
+      ],
+    ),
+    body: FutureBuilder<List<FirebaseFile>>(
+      future: futureFiles,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              return Center(child: Text('Some error occurred!'));
+            } else {
+              final files = snapshot.data;
+
+              return GridView.builder(
+                padding: EdgeInsets.all(4),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 4,crossAxisSpacing: 4),
+                      itemCount: files.length,
+                      itemBuilder: (context, index) {
+                        final file = files[index];
+                          return buildFile(context, file);
                       },
-                      icon: Icon(Icons.home),
-                      color: Colors.white,
-                      iconSize: 30,
-                    ),
+              );
+            }
+        }
+      },
+    ),
+    bottomNavigationBar: Theme(
+      data: Theme.of(context).copyWith(
+          canvasColor: Color.fromRGBO(255, 255, 255, 255),
+          primaryColor: Colors.red,
+          textTheme: Theme.of(context)
+              .textTheme
+              .copyWith(caption: TextStyle(color: Colors.black))),
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: 0,
+            items: [
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new HomeScreen()),
+                      );
+                    },
+                    icon: Icon(Icons.home),
+                    color: Colors.white,
+                    iconSize: 30,
                   ),
+                ),
 
-                  backgroundColor: Color(0xFF143B40),
-                  // ignore: deprecated_member_use
-                  title: Text(''),
+                backgroundColor: Color(0xFF143B40),
+                // ignore: deprecated_member_use
+                title: Text(''),
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new Leaderboard()),
+                    );
+                  },
+                  icon: Icon(Icons.leaderboard),
+                  color: Colors.white,
+                  iconSize: 30,
                 ),
-                BottomNavigationBarItem(
-                  icon: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new Leaderboard()),
-                      );
-                    },
-                    icon: Icon(Icons.leaderboard),
-                    color: Colors.white,
-                    iconSize: 30,
-                  ),
-                  // ignore: deprecated_member_use
-                  title: Text(''),
+                // ignore: deprecated_member_use
+                title: Text(''),
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new Achievement()),
+                    );
+                  },
+                  icon: Icon(Icons.emoji_events_rounded),
+                  color: Colors.white,
+                  iconSize: 30,
                 ),
-                BottomNavigationBarItem(
-                  icon: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new Achievement()),
-                      );
-                    },
-                    icon: Icon(Icons.emoji_events_rounded),
-                    color: Colors.white,
-                    iconSize: 30,
-                  ),
 
-                  // ignore: deprecated_member_use
-                  title: Text(''),
+                // ignore: deprecated_member_use
+                title: Text(''),
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new Members()),
+                    );
+                  },
+                  icon: Icon(Icons.group_rounded),
+                  color: Colors.white,
+                  iconSize: 30,
                 ),
-                BottomNavigationBarItem(
-                  icon: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => new Members()),
-                      );
-                    },
-                    icon: Icon(Icons.group_rounded),
-                    color: Colors.white,
-                    iconSize: 30,
-                  ),
-                  // ignore: deprecated_member_use
-                  title: Text(''),
-                ),
-              ],
-            ),
+                // ignore: deprecated_member_use
+                title: Text(''),
+              ),
+            ],
           ),
         ),
       ),
-      body: Container(
+    ),
+  );
 
-        // constraints: BoxConstraints.expand(),
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage("assets/athlete.jpeg"),
-        //     fit: BoxFit.fill,
-        //   ),
-        // ),
-        child: makeItemGrid(
-        ),
+  Widget buildFile(BuildContext context, FirebaseFile file) =>
+      GestureDetector(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ImagePage(file: file),
+        )),
+        child: Container(
+        child: CachedNetworkImage(
+          imageUrl: file.url,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                  ),
+            ),
+          ),
+          placeholder: (context, url) => Center(child:Text('No Data')),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),)
 
-      ),
+  );
+
+}
 
 
+class FirebaseApi {
+  static Future<List<String>> _getDownloadLinks(List<Reference> refs) =>
+      Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());
 
-    );
+  static Future<List<FirebaseFile>> listAll(String path) async {
+    final ref = FirebaseStorage.instance.ref(path);
+    final result = await ref.listAll();
 
+    final urls = await _getDownloadLinks(result.items);
+
+    return urls
+        .asMap()
+        .map((index, url) {
+      final ref = result.items[index];
+      final name = ref.name;
+      final file = FirebaseFile(ref: ref, name: name, url: url);
+
+      return MapEntry(index, file);
+    })
+        .values
+        .toList();
+  }
+
+  static Future downloadFile(Reference ref) async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/${ref.name}');
+
+    await ref.writeToFile(file);
   }
 }
 
-class ImageGridItem extends StatefulWidget {
-  int _index;
-  ImageGridItem(int index){
-    this._index=index;
-  }
+class FirebaseFile {
+  final Reference ref;
+  final String name;
+  final String url;
 
-  @override
-  _ImageGridItemState createState() => _ImageGridItemState();
-}
-
-class _ImageGridItemState extends State<ImageGridItem> {
-  Uint8List imagefile;
-  Reference photorefernce = FirebaseStorage.instance.ref().child("TeamPhotos");
-
-  getImage(){
-    if(!requestedIndexes.contains(widget._index)){
-      int Max_size = 30*1024*1024;
-
-      photorefernce.child("image_${widget._index}.jpg").getData(Max_size).then((data){
-        this.setState(() {
-          imagefile =data;
-        });
-        imageData.putIfAbsent(widget._index, ()
-        {
-          return data;
-        });
-      }).catchError((error){
-        // debugPrint(error.toStrings());
-      });
-      requestedIndexes.add(widget._index);
-    }
-  }
-  Widget decideGridTileWidget(){
-    if(imagefile==null){
-      return Center(child: Text("No Data") );
-    }else{
-      return Image.memory(imagefile,fit: BoxFit.fill,);
-    }
-  }
-  @override
-  Void initState(){
-    super.initState();
-    if(!imageData.containsKey(widget._index)){
-      getImage();
-    }else{
-      this.setState(() {
-        imagefile=imageData[widget._index];
-      });
-
-    }
-  }
-  @override
-  Widget build(BuildContext context) {
-    return GridTile(child: decideGridTileWidget());
-  }
+  const FirebaseFile({
+    this.ref,
+    this.name,
+    this.url,
+  });
 }
 

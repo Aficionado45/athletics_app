@@ -35,9 +35,8 @@ class _AthleteOfYearState extends State<AthleteOfYear> {
           centerTitle: true,
           leading: FlatButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new Leaderboard()),
+              Navigator.pop(
+                context
               );
             },
             child: Icon(
@@ -82,7 +81,7 @@ class _AthleteOfYearState extends State<AthleteOfYear> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new HomeScreen()),
@@ -101,7 +100,7 @@ class _AthleteOfYearState extends State<AthleteOfYear> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Leaderboard()),
@@ -117,7 +116,7 @@ class _AthleteOfYearState extends State<AthleteOfYear> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Achievement()),
@@ -134,7 +133,7 @@ class _AthleteOfYearState extends State<AthleteOfYear> {
                   BottomNavigationBarItem(
                     icon: IconButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new Members()),
