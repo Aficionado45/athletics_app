@@ -40,6 +40,9 @@ class _addmemState extends State<addmem> {
   final _auth=FirebaseAuth.instance;
   final userCollection =FirebaseFirestore.instance.collection("users");
   String name,email,uid,type,batch;
+  var _controller1 = TextEditingController();
+  var _controller2 = TextEditingController();
+  var _controller3 = TextEditingController();
   void getCurrentUser()async{
     try{
       final user=_auth.currentUser;
@@ -82,7 +85,15 @@ class _addmemState extends State<addmem> {
             SizedBox(
               height: 10,
             ),
-
+            Container(
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                alignment: FractionalOffset.centerLeft,
+                width: 400,
+                height: 5),
+            SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                 color: Color(0xFF02386E),
@@ -93,10 +104,12 @@ class _addmemState extends State<addmem> {
               height: 59,
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
               child: TextField(
+                controller: _controller1,
                 obscureText: false,
                 style: TextStyle(
                   color: Colors.white,
                 ),
+
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
                 onChanged: (value){
@@ -107,6 +120,7 @@ class _addmemState extends State<addmem> {
                   }
                 },
                 decoration: InputDecoration(
+
                   fillColor: Colors.white,
                   labelStyle: TextStyle(
                       color: Colors.white,
@@ -131,10 +145,12 @@ class _addmemState extends State<addmem> {
               height: 59,
               padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
               child: TextField(
+                controller: _controller2,
                 obscureText: false,
                 style: TextStyle(
                   color: Colors.white,
                 ),
+
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
                 onChanged: (value){
@@ -173,6 +189,7 @@ class _addmemState extends State<addmem> {
                 style: TextStyle(
                   color: Colors.white,
                 ),
+                controller: _controller3,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
                 onChanged: (value){
@@ -203,13 +220,17 @@ class _addmemState extends State<addmem> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               alignment: FractionalOffset.center,
-              width: 400,
+              width:303,
               height: 58,
 
               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               // ignore: deprecated_member_use
               child: FlatButton(
+
                 onPressed: (){
+                  _controller1.clear();
+                  _controller2.clear();
+                  _controller3.clear();
                   FirebaseFirestore.instance.runTransaction((transaction) async {
                     await transaction.set(FirebaseFirestore.instance.collection("users").doc(), {
                       'name': name,

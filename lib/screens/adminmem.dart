@@ -27,6 +27,7 @@ class _adminmemState extends State<adminmem> {
 
   final userCollection =FirebaseFirestore.instance.collection("users");
   String uid;
+  var _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,76 +95,85 @@ class _adminmemState extends State<adminmem> {
                 image: AssetImage("assets/athlete.jpeg"), fit: BoxFit.fill),
           ),
           child: StreamBuilder(
-              stream:
-              FirebaseFirestore.instance.collection('users').snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+        stream:
+        FirebaseFirestore.instance.collection('users').snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-                return ListView(
+            return ListView(
 
-                  children: snapshot.data.docs.map((doc) {
-                    return Container(
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF143B40),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+              children: snapshot.data.docs.map((doc) {
+                return Container(
+                  padding: EdgeInsets.fromLTRB(28, 10,28, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFF143B40),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+
+                    child: FlatButton(
+                      onPressed:
+                          () {
+                        uid=doc.id;
+                        print(uid);
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(builder: (context) => new MemberScreen(uid)),
+                        );
+                      },
+                      child: Row(children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(doc.data()['image_url']),
+                          radius: 40,
                         ),
-
-                        child: FlatButton(
-                          onPressed:
-                              () {
-                            uid=doc.id;
-                            print(uid);
-
-                          },
-                          child: Row(children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage('assets/logo.png'),
-                              radius: 40,
+                        Column(children: [
+                          Container(
+                            alignment: FractionalOffset.centerLeft,
+                            padding: EdgeInsets.fromLTRB(15, 10, 0, 5),
+                            width: MediaQuery.of(context).size.width / 2.4,
+                            height: MediaQuery.of(context).size.height / 11,
+                            child: Text(
+                              doc.data()['name'],
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white),
                             ),
-
-                            Row(children: [
-
-                              Container(
-
-                                child: Text(
-                                  doc.data()['name'],
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-
-                              ),
-                              Container(
-
-                                child: IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  color: Colors.white,
-                                  onPressed: () {
-                                    uid=doc.id;
-                                    final collection = FirebaseFirestore.instance.collection('users');
-                                  collection
-                                      .doc(uid)
-                                      .delete()
-                                      .then((_) => print('Deleted'))
-                                      .catchError((error) => print('Delete failed: $error'));},
-                                ),
-
-                              ),
-
-                            ]),
-                          ]),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                          ),
+                          Container(
+                            alignment: FractionalOffset.centerLeft,
+                            padding: EdgeInsets.fromLTRB(15, 1, 0, 25),
+                            width: MediaQuery.of(context).size.width / 2.4,
+                            height: MediaQuery.of(context).size.height / 16,
+                            child: Text(
+                              doc.data()['batch'],
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white),
+                            ),
+                          ),
+                        ])
+                       , IconButton(
+                            icon: const Icon(Icons.delete),
+                            color: Colors.white,
+                            onPressed: () {
+                              uid=doc.id;
+                              final collection = FirebaseFirestore.instance.collection('users');
+                              collection
+                                  .doc(uid)
+                                  .delete()
+                                  .then((_) => print('Deleted'))
+                                  .catchError((error) => print('Delete failed: $error'));},
+                          ),
+                      ]),
+                    ),
+                  ),
                 );
-              }),
+              }).toList(),
+            );
+          }),
         ),
       ),
     );
